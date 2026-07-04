@@ -1,0 +1,35 @@
+[
+  {
+    "id": "1",
+    "title": "FinTech Mobile Wallet",
+    "category": "Mobile App",
+    "description": "A secure, scalable fintech mobile wallet designed for instant transactions and budgeting analytics.",
+    "imageUrl": "/images/portfolio/fintech-wallet.jpg",
+    "slug": "fintech-mobile-wallet",
+    "client": "FinanceCorp Inc.",
+    "date": "May 2026",
+    "technologies": ["React Native", "TypeScript", "Node.js", "PostgreSQL"]
+  },
+  {
+    "id": "2",
+    "title": "E-Commerce Design System",
+    "category": "UI/UX Design",
+    "description": "Establishing a unified design language and reusable component library for a multi-brand retailer.",
+    "imageUrl": "/images/portfolio/ecommerce-design.jpg",
+    "slug": "ecommerce-design-system",
+    "client": "ShopSphere Group",
+    "date": "March 2026",
+    "technologies": ["Figma", "Tailwind CSS", "Storybook"]
+  },
+  {
+    "id": "3",
+    "title": "SaaS Analytics Dashboard",
+    "category": "Web Development",
+    "description": "Building a real-time data visualization platform with advanced filtering and export options.",
+    "imageUrl": "/images/portfolio/saas-dashboard.jpg",
+    "slug": "saas-analytics-dashboard",
+    "client": "LogiTrack Solutions",
+    "date": "January 2026",
+    "technologies": ["Next.js", "Chart.js", "Tailwind CSS", "FastAPI"]
+  }
+]
