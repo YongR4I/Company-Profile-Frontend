@@ -6,6 +6,8 @@ import Headline from "@/components/layout/Headline";
 import WhyUs from "@/components/sections/home/WhyUs";
 import HeadlineChild from "@/components/layout/HeadlineChild";
 import Partners from "@/components/sections/Partners";
+import CTA from "@/components/sections/CTA/CTA";
+import Footer from "@/components/layout/Footer";
 
 export default function Home() {
   return (
@@ -17,6 +19,8 @@ export default function Home() {
       <Headline text="Why Busiesses Choose Us?" />
       <WhyUs />
       <Partners />
+      <CTA />
+      <Footer />
     </div>
   );
 }

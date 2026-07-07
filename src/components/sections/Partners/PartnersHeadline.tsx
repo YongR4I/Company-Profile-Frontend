@@ -3,7 +3,7 @@ import React from 'react';
 
 export default function PartnersHeadline() {
   return (
-    <HeadlineChild className="flex flex-col items-start justify-start gap-5">
+    <HeadlineChild className="flex flex-col items-start justify-start gap-5 mt-20 mb-10">
       <h2 className="text-display-sub w-150 font-medium">
         Partners in innovation
       </h2>

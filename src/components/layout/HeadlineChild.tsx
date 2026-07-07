@@ -10,7 +10,7 @@ export default function HeadlineChild({ children, className }: HeadlineChildProp
   return (
     <CommonLayout
       id="headline"
-      className={`${className || ''} h-fit! flexitems-center justify-between mt-50 mb-30 py-5`}
+      className={`${className || ''} h-fit! flexitems-center justify-between py-5`}
     >
       {children}
     </CommonLayout>
