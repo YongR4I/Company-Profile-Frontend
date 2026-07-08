@@ -1,4 +1,5 @@
 import CommonLayout from '@/components/layout/CommonLayout';
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
@@ -49,18 +50,18 @@ export default function CTA({
   href = "/contact",
 }: CTAProps) {
   return (
-    <CommonLayout className="h-fit! px-10 py-10 items-center justify-center">
+    <CommonLayout className="h-fit! px-6 sm:px-10 py-10 items-center justify-center">
       <div
         id="cta-div"
-        className="w-full bg-linear-to-b from-[#040B0D] from-6% via-[#337E9D] via-76% to-[#55C6CA] rounded-[2.5rem] border border-[#122C37] overflow-hidden relative px-10 py-10"
+        className="w-full bg-linear-to-b from-[#040B0D] from-6% via-[#337E9D] via-76% to-[#55C6CA] rounded-[2.5rem] border border-[#122C37] overflow-hidden relative px-6 pt-10 sm:px-10"
       >
-        <div className="flex flex-col md:flex-row items-center justify-between w-full relative z-10">
+        <div className="flex flex-col lg:flex-row items-center justify-between w-full relative z-10">
           {/* Left Content */}
-          <div className="flex flex-col items-center text-center gap-8 md:w-1/2 py-10 md:py-0">
-            <h2 className="text-white font-semibold text-[clamp(32px,5vw,56px)] leading-[1.05] tracking-[-1.12px] max-w-[744px]">
+          <div className="flex flex-col items-center text-center gap-8 lg:w-1/2 py-6 lg:py-0">
+            <h2 className="text-white font-semibold text-[clamp(28px,5vw,56px)] leading-[1.05] tracking-[-1.12px] max-w-[744px]">
               {title}
             </h2>
-            <p className="text-ice-300 text-[clamp(16px,2vw,24px)] leading-[32px] tracking-[-0.48px] max-w-[640px]">
+            <p className="text-ice-300 text-[clamp(16px,1.8vw,24px)] leading-relaxed tracking-[-0.48px] max-w-[640px]">
               {description}
             </p>
             <Link
@@ -75,12 +76,13 @@ export default function CTA({
           </div>
 
           {/* Right Content - Character Image */}
-          <div className="md:w-1/2 flex items-center justify-center relative h-[300px] md:h-[500px]">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+          <div className="w-full lg:w-1/2 flex items-center justify-center relative h-[250px] sm:h-[300px] lg:h-[500px] mt-6 lg:mt-0">
+            <Image
               src="/images/branding/whale.png"
               alt="Sabiru Mascot"
-              className="object-contain h-full w-auto md:absolute md:right-[-40px] md:bottom-[-40px]"
+              fill
+              className="object-contain lg:absolute lg:right-[-40px] lg:bottom-[-40px]"
+              sizes="(max-width: 1024px) 100vw, 50vw"
             />
           </div>
         </div>

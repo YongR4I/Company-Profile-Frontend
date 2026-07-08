@@ -16,16 +16,16 @@ const socialLinks = [
 export default function HeroFooter() {
   return (
     <CommonLayout
-      className="bg-[#071115] flex flex-row justify-between items-end-safe h-fit!"
+      className="bg-[#071115] flex flex-col md:flex-row justify-between items-start md:items-center h-fit! py-8 md:py-10 gap-6 md:gap-8"
       id="hero-footer"
     >
-      <div className="text-wrapper w-full items-center">
-        <p className="text-white w-100 text-heading-h4">
+      <div className="text-wrapper w-full md:w-auto">
+        <p className="text-white w-full max-w-[400px] text-heading-h4 leading-relaxed">
           From strategy to deployment, we help businesses build modern digital
           products that are scalable, secure, and ready for the future.
         </p>
       </div>
-      <div className="social-container w-full h-full flex flex-row justify-end items-center gap-4">
+      <div className="social-container w-full md:w-auto flex flex-row justify-start md:justify-end items-center gap-4">
         {socialLinks.map(({ icon: Icon, href }) => (
           <SocialButton key={href} href={href}>
             <Icon size={30} />

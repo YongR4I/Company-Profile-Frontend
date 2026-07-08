@@ -1,4 +1,5 @@
 import CommonLayout from "@/components/layout/CommonLayout";
+import Image from "next/image";
 import React from "react";
 
 const whyCards = [
@@ -62,11 +63,22 @@ export default function WhyChooseUs() {
   return (
     <CommonLayout
       id="whyus-section"
-      className="w-full justify-center overflow-hidden"
+      className="h-fit! w-full justify-center overflow-hidden py-10 md:py-20"
     >
       <div className="relative w-full z-1">
+        {/* Robot image - hidden on mobile, z-1: behind black fade (z-3), in front of blue circle (z-0) */}
+        <div className="hidden lg:flex absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-[20%] z-1 w-[450px] h-[450px] pointer-events-none justify-center">
+          <Image
+            src="/images/branding/robot.png"
+            alt="Robot mascot"
+            width={450}
+            height={450}
+            className="w-auto h-auto object-contain"
+          />
+        </div>
+
         {/* Desktop: Left and Right sections */}
-        <div className="hidden md:flex flex-row items-center justify-between gap-[180px]">
+        <div className="hidden lg:flex flex-row items-center justify-between gap-[180px]">
           {/* Left Section */}
           <div className="flex flex-col gap-40">
             <WhyCard {...whyCards[1]} className="translate-x-[10vw]" />
@@ -79,14 +91,14 @@ export default function WhyChooseUs() {
           </div>
         </div>
 
-        {/* Mobile: Single column */}
-        <div className="flex md:hidden flex-col gap-[30px]">
+        {/* Mobile / Tablet: Single column centered */}
+        <div className="flex lg:hidden flex-col gap-[30px] items-center w-full">
           {whyCards.map((card) => (
             <WhyCard key={card.number} {...card} />
           ))}
         </div>
 
-        <div className="absolute bottom-0 left-0 w-full z-3 h-[90px] pointer-events-none bg-gradient-to-b from-transparent to-[#040A0C] to-80%" />
+        <div className="absolute left-0 w-full z-3 h-[90px] pointer-events-none bg-gradient-to-b from-transparent to-[#040A0C] to-80%" />
 
         {/* Grid background */}
         <div
@@ -100,7 +112,7 @@ export default function WhyChooseUs() {
 
         {/* Circle light gradient */}
         <div
-          className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-[100rem] h-[100rem] z-0 pointer-events-none"
+          className="absolute max-sm:hidden bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-[100rem] h-[100rem] z-0 pointer-events-none"
           style={{
             borderRadius: "99rem",
             background: "radial-gradient(41.31% 41.31% at 50% 50%, #49A6CC 0%, rgba(73, 166, 204, 0.00) 100%)",

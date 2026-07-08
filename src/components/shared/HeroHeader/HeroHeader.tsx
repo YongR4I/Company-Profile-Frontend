@@ -17,11 +17,11 @@ export default function HeroHeader({
   if (variant === "home") {
     return (
       <section
-        className="h-[calc(100vh-10rem)] w-full bg-cover bg-center bg-no-repeat flex items-center top-0 left-0 md:px-16 relative"
+        className="min-h-[calc(100dvh-10rem)] w-full bg-cover bg-center bg-no-repeat flex items-center top-0 left-0 px-6 sm:px-12 md:px-16 relative py-20"
         style={{ backgroundImage: `url('${backgroundImage}')` }}
       >
         <div className="absolute bottom-0 left-0 w-full h-[171px] pointer-events-none bg-gradient-to-b from-transparent to-[#040A0C] to-80%" />
-        <div className="w-full relative">
+        <div className="w-full relative z-10">
           <h1
             className="text-white font-medium text-[clamp(28px,7.5vw,80px)] tracking-tight leading-[1.1] sm:leading-[1.1]"
             style={{ fontFamily: "var(--font-inter)" }}
@@ -36,7 +36,7 @@ export default function HeroHeader({
   if (variant === "portfolio") {
     return (
       <CommonLayout
-        className="!h-[calc(100vh-10rem)] !bg-cover !bg-center !bg-no-repeat items-end justify-start !px-4 md:!px-18 pb-[80px]"
+        className="!min-h-[calc(100dvh-10rem)] !bg-cover !bg-center !bg-no-repeat items-end justify-start !px-4 md:!px-18 pb-[80px]"
         style={{ backgroundImage: `url('${backgroundImage}')` }}
       >
         <div className="absolute inset-0 bg-water-900/60 mix-blend-multiply" />

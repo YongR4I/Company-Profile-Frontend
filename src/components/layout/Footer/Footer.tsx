@@ -69,12 +69,12 @@ export default function Footer() {
               alt="SA'RU Samudra Biru Dev Logo"
               width={210}
               height={210}
-              className="object-contain"
+              className="object-contain w-[120px] h-[120px] sm:w-[210px] sm:h-[210px]"
             />
           </div>
 
           {/* Links columns */}
-          <div className="flex flex-wrap gap-12 lg:gap-32">
+          <div className="grid grid-cols-2 gap-12 sm:flex sm:flex-row lg:gap-32 w-full lg:w-auto">
             {/* Company Links */}
             <div>
               <h4 className="text-heading-h5 font-medium text-gray-500 mb-3">
@@ -85,7 +85,7 @@ export default function Footer() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-heading-h3 font-normal text-white hover:text-water-200 transition-colors"
+                      className="text-heading-h4 md:text-heading-h3 font-normal text-white hover:text-water-200 transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -102,7 +102,7 @@ export default function Footer() {
               <ul className="space-y-2.5">
                 {serviceLinks.map((item, index) => (
                   <li key={index}>
-                    <span className="text-heading-h3 font-normal text-white">
+                    <span className="text-heading-h4 md:text-heading-h3 font-normal text-white">
                       {item}
                     </span>
                   </li>
@@ -113,7 +113,7 @@ export default function Footer() {
         </div>
 
         {/* Social Section */}
-        <div className="flex justify-end py-6">
+        <div className="flex justify-start lg:justify-end py-6">
           <div className="flex gap-2.5">
             {socialLinks.map((social, index) => (
               <Link
@@ -130,9 +130,9 @@ export default function Footer() {
         </div>
 
         {/* Address Section */}
-        <div className="flex flex-col sm:flex-row justify-end gap-10 py-6">
+        <div className="flex flex-col sm:flex-row justify-start lg:justify-end gap-10 py-6">
           {/* Office Card */}
-          <div className="max-w-[404px]">
+          <div className="w-full sm:max-w-[404px]">
             <h4 className="text-heading-h5 font-medium text-water-200 mb-2">
               Office
             </h4>
@@ -144,7 +144,7 @@ export default function Footer() {
           </div>
 
           {/* Workshop Card */}
-          <div className="max-w-[300px]">
+          <div className="w-full sm:max-w-[300px]">
             <h4 className="text-heading-h5 font-medium text-water-200 mb-2">
               Workshop
             </h4>

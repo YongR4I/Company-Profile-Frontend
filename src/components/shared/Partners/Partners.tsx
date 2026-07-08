@@ -34,18 +34,18 @@ export default function Partners({
 }: PartnersProps) {
   return (
     <>
-      <HeadlineChild className="flex flex-col items-start justify-start gap-5 mt-20 mb-10">
-        <h2 className="text-display-sub w-150 font-medium">
+      <HeadlineChild className="flex flex-col items-start justify-start gap-5 mt-12 mb-6 md:mt-20 md:mb-10">
+        <h2 className="text-3xl sm:text-4xl md:text-display-sub w-full max-w-[600px] font-medium text-white">
           {title}
         </h2>
         {description && (
-          <p className="text-heading-h4 text-gray-400 w-1/2">
+          <p className="text-body-large md:text-heading-h4 text-gray-400 w-full lg:w-1/2">
             {description}
           </p>
         )}
       </HeadlineChild>
 
-      <CommonLayout className="h-fit! px-10 py-10 items-center justify-center">
+      <CommonLayout className="h-fit! px-6 sm:px-10 py-10 items-center justify-center">
         <div className="relative w-full max-w-[1598px]">
           <div
             className="absolute inset-0 z-0 pointer-events-none"
@@ -61,7 +61,7 @@ export default function Partners({
               partner.isEmpty ? (
                 <div
                   key={partner.id}
-                  className="h-[243px] rounded-[20px] border border-transparent p-[10px]"
+                  className="hidden lg:block h-[243px] rounded-[20px] border border-transparent p-[10px]"
                 />
               ) : (
                 <div

@@ -9,9 +9,9 @@ export default function Headline({ text }: HeadlineProps) {
   return (
     <CommonLayout
       id="headline"
-      className="h-fit! flex flex-row items-center justify-between mt-30 mb-20 py-5"
+      className="h-fit! flex flex-row items-center justify-between mt-16 mb-8 md:mt-30 md:mb-20 py-5"
     >
-      <h2 className="text-display-sub w-150 font-medium">
+      <h2 className="text-3xl sm:text-4xl md:text-display-sub w-full max-w-[600px] font-medium text-white">
         {text}
       </h2>
     </CommonLayout>
