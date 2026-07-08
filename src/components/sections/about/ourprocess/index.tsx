@@ -40,7 +40,7 @@ export default function OurProcess() {
     <CommonLayout className="h-fit! flex-col items-start justify-center py-16 md:py-24">
       <div className="w-full">
         <span
-          className="text-white tracking-tighter block mb-12 md:mb-16"
+          className="text-gray-600 tracking-tighter block mb-12 md:mb-16"
           style={{
             fontFamily: "var(--font-inter)",
             fontSize: "clamp(18px, 2.5vw, 28px)",
@@ -77,7 +77,7 @@ export default function OurProcess() {
           {processSteps.map((step) => (
             <div
               key={step.number}
-              className={`group relative bg-water-900 border border-water-300/20 hover:border-water-300/40 p-8 md:p-10 flex flex-col w-full md:flex-1 ${step.marginTop} ${step.minHeight}`}
+              className={`group relative bg-water-900 border border-water-300/30 hover:border-water-300/60 p-8 md:p-10 flex flex-col w-full md:flex-1 ${step.marginTop} ${step.minHeight}`}
             >
               <div className="relative z-10 flex flex-col gap-4 md:gap-6">
                 <h3
@@ -105,7 +105,7 @@ export default function OurProcess() {
               </div>
 
               <span
-                className="absolute bottom-4 md:bottom-6 right-4 md:right-6 text-white/10 font-semibold leading-none pointer-events-none select-none"
+                className="absolute bottom-4 md:bottom-6 right-4 md:right-6 text-transparent bg-clip-text bg-linear-to-b from-white to-transparent font-semibold leading-none pointer-events-none select-none"
                 style={{
                   fontFamily: "var(--font-inter)",
                   fontSize: "clamp(80px, 8vw, 140px)",

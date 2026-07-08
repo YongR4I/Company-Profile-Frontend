@@ -5,7 +5,7 @@ export default function OurMission() {
     <CommonLayout className="h-fit! flex-col items-start justify-center py-16 md:py-24">
       <div className="w-full text-left">
         <span
-          className="text-white tracking-tighter block mb-4 md:mb-6"
+          className="text-gray-600 tracking-tighter block mb-4 md:mb-6"
           style={{
             fontFamily: "var(--font-inter)",
             fontSize: "clamp(18px, 2.5vw, 28px)",
