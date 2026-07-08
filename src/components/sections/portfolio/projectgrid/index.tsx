@@ -27,7 +27,7 @@ export default function ProjectGrid() {
           {visibleProjects.map((project, index) => (
             <div 
               key={project.id} 
-              className={`p-8 md:p-12 lg:p-16 flex flex-col gap-6
+              className={`p-8 md:p-12 lg:p-16 flex flex-col gap-6 bg-transparent hover:bg-white/5
                 ${index % 2 === 0 ? "md:border-r border-[#132731]" : ""}
                 ${index < Math.ceil(visibleProjects.length / 2) * 2 - 2 ? "border-b border-[#132731]" : ""}
               `}

@@ -39,7 +39,7 @@ export default function ServiceSection() {
     <CommonLayout className="h-fit! flex-col items-start justify-center py-16 md:py-24">
       <div className="w-full flex flex-col gap-16 md:gap-20">
         {services.map((service, index) => (
-          <div key={index} className="flex flex-col">
+          <div key={index} className="flex flex-col bg-transparent">
             <div className="flex flex-row items-center justify-between gap-8">
               {/* Title - Kiri */}
               <div className="w-[220px] flex-shrink-0">
