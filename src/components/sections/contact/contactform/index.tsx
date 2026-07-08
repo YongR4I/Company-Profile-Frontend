@@ -105,19 +105,6 @@ export default function ContactForm() {
               <span className="relative z-10 transition-all duration-300">
                 Send
               </span>
-              <svg
-                className="relative z-10"
-                width="15"
-                height="15"
-                viewBox="0 0 20 20"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M2.1 19.7868L0 17.6559L14.4 3.04412H1.5V0H19.5V18.2647H16.5V5.175L2.1 19.7868Z"
-                  fill="#1E4454"
-                />
-              </svg>
               <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-water-300/40 to-transparent group-hover:translate-x-full transition-transform duration-1000 ease-out pointer-events-none" />
               <span className="absolute inset-0 rounded-full ring-2 ring-water-400/0 group-hover:ring-water-400/40 transition-all duration-300 pointer-events-none" />
             </button>
