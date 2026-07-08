@@ -1,23 +1,32 @@
-import Hero from "@/components/sections/home/hero";
-import HeroFooter from "@/components/sections/home/herofooter";
-import AboutHeadline from "@/components/sections/home/about/AboutHeadline";
-import AboutSection from "@/components/sections/home/about";
-import Headline from "@/components/layout/Headline";
-import WhyUs from "@/components/sections/home/WhyUs";
-import HeadlineChild from "@/components/layout/HeadlineChild";
-import Partners from "@/components/sections/Partners";
-import CTA from "@/components/sections/CTA/CTA";
+import HeroHeader from "@/components/shared/HeroHeader";
+import HeroFooter from "@/components/sections/home/HeroFooter";
+import AboutPreview, { AboutHeadline } from "@/components/sections/home/AboutPreview";
+import Headline from "@/components/shared/Headline";
+import WhyChooseUs from "@/components/sections/home/WhyChooseUs";
+import Partners from "@/components/shared/Partners";
+import CTA from "@/components/shared/CTA";
 import Footer from "@/components/layout/Footer";
 
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen bg-transparent">
-      <Hero />
+      <HeroHeader
+        title={
+          <>
+            Digital Innovation.
+            <br />
+            Designed Around Your
+            <br />
+            Business.
+          </>
+        }
+        variant="home"
+      />
       <HeroFooter />
       <AboutHeadline />
-      <AboutSection />
+      <AboutPreview />
       <Headline text="Why Busiesses Choose Us?" />
-      <WhyUs />
+      <WhyChooseUs />
       <Partners />
       <CTA />
       <Footer />

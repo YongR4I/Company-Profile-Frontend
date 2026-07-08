@@ -1,14 +1,21 @@
-import ServicesHero from "@/components/sections/services/hero";
-import ServiceSection from "@/components/sections/services/service-section";
-import Partners from "@/components/sections/Partners";
-import CTA from "@/components/sections/CTA/CTA";
+import HeroHeader from "@/components/shared/HeroHeader";
+import ServicesGrid from "@/components/sections/services/ServicesGrid";
+import Partners from "@/components/shared/Partners";
+import CTA from "@/components/shared/CTA";
 import Footer from "@/components/layout/Footer";
 
 export default function ServicesPage() {
   return (
     <div className="flex flex-col min-h-screen bg-water-900">
-      <ServicesHero />
-      <ServiceSection />
+      <HeroHeader
+        title={
+          <>
+            <span className="text-water-300">Sabiru</span> Services
+          </>
+        }
+        subtitle="What we do for you"
+      />
+      <ServicesGrid />
       <Partners />
       <CTA />
       <Footer />
