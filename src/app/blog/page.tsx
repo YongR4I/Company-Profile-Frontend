@@ -8,7 +8,11 @@ export default function BlogPage() {
   return (
     <div className="flex flex-col min-h-screen bg-water-900">
       <HeroHeader
-        title="Blog"
+        title={
+          <>
+            Sabiru <span className="text-water-300">Blog</span>
+          </>
+        }
         subtitle="What's on our mind"
         variant="subpage"
       />

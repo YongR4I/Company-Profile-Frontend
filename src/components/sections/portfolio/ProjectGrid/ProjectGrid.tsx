@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { portfolioData } from "@/data/portfolio";
 
 const INITIAL_VISIBLE = 4;
@@ -32,27 +31,27 @@ export default function ProjectGrid() {
                 ${index < Math.ceil(visibleProjects.length / 2) * 2 - 2 ? "border-b border-[#132731]" : ""}
               `}
             >
-              <Link href={`/portfolio/${project.slug}`} className="relative w-full aspect-[4/3] rounded-[18px] overflow-hidden group block">
+              <div className="relative w-full aspect-[4/3] rounded-[18px] overflow-hidden">
                 <Image 
                   src={project.imageUrl} 
                   alt={project.title}
                   fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="object-cover"
                 />
                 <div className="absolute top-0 left-0 z-10">
                   <div className="bg-white/10 backdrop-blur-md border border-white/20 text-white text-sm px-6 py-2 rounded-full">
                     {project.category}
                   </div>
                 </div>
-              </Link>
+              </div>
 
               <div className="flex flex-col gap-4">
                 <div className="flex flex-col xl:flex-row justify-between items-start xl:items-center gap-4">
-                  <Link href={`/portfolio/${project.slug}`} className="hover:text-gray-300 transition-colors">
+                  <div>
                     <h3 className="text-white text-[32px] font-medium tracking-tight">
                       {project.title}
                     </h3>
-                  </Link>
+                  </div>
                   <div className="flex flex-row flex-wrap gap-3">
                     {project.technologies?.slice(0, 2).map((tech, i) => (
                       <span key={i} className="border border-[#3A4A52] text-white text-sm px-5 py-2 rounded-full">

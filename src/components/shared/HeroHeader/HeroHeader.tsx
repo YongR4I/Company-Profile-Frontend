@@ -36,7 +36,7 @@ export default function HeroHeader({
   if (variant === "portfolio") {
     return (
       <CommonLayout
-        className="!min-h-[calc(100dvh-10rem)] !bg-cover !bg-center !bg-no-repeat items-end justify-start !px-4 md:!px-18 pb-[80px]"
+        className="!min-h-[calc(100dvh-10rem)] max-sm:!min-h-[calc(100dvh-30rem)] !bg-cover !bg-center !bg-no-repeat items-end justify-start !px-4 md:!px-18 pb-[80px]"
         style={{ backgroundImage: `url('${backgroundImage}')` }}
       >
         <div className="absolute inset-0 bg-water-900/60 mix-blend-multiply" />

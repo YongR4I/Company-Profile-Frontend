@@ -56,7 +56,7 @@ export default function Partners({
             }}
           />
 
-          <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[20px]">
+          <div className="relative z-10 grid grid-cols-2 lg:grid-cols-4 gap-[15px] sm:gap-[20px]">
             {partners.map((partner) =>
               partner.isEmpty ? (
                 <div
@@ -66,7 +66,7 @@ export default function Partners({
               ) : (
                 <div
                   key={partner.id}
-                  className="h-[243px] rounded-[1.25rem] border border-water-600/70 p-[30px] flex items-center justify-center overflow-hidden hover:border-water-600 transition-all duration-300 bg-[radial-gradient(86.71%_79.65%_at_9.6%_100.14%,_#132F3B_0%,_#071115_100%)]
+                  className="h-[120px] sm:h-[180px] lg:h-[243px] rounded-[1.25rem] border border-water-600/70 p-[15px] sm:p-[30px] flex items-center justify-center overflow-hidden hover:border-water-600 transition-all duration-300 bg-[radial-gradient(86.71%_79.65%_at_9.6%_100.14%,_#132F3B_0%,_#071115_100%)]
                   hover:bg-[radial-gradient(86.71%_79.65%_at_9.6%_100.14%,_#194152_0%,_#071115_100%)] hover:scale-105"
                 >
                   <Image

@@ -84,11 +84,11 @@ interface BlogDetailProps {
 
 export default function BlogDetail({ post }: BlogDetailProps) {
   return (
-    <article className="w-full bg-[#040A0C] min-h-screen">
+    <article className="w-full bg-[#040A0C] min-h-screen ">
       <div className="w-full max-w-[820px] mx-auto px-4 md:px-0 py-12 md:py-16">
         <Link
           href="/blog"
-          className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-10"
+          className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-10 mt-25"
         >
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M15.8333 10H4.16667M4.16667 10L10 15.8333M4.16667 10L10 4.16667" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -113,7 +113,7 @@ export default function BlogDetail({ post }: BlogDetailProps) {
           className="text-white font-medium italic tracking-tight leading-[1.1] mb-8"
           style={{
             fontFamily: "var(--font-inter)",
-            fontSize: "clamp(32px, 5vw, 56px)",
+            fontSize: "clamp(32px, 5vw, 72px)",
           }}
         >
           {post.title}

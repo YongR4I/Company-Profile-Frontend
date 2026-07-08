@@ -20,7 +20,7 @@ function ArrowIcon({ className }: { className?: string }) {
 }
 
 const items = [
-  "Let's Build Together",
+  "Discuss your project requirements",
   "Free project consultation",
   "Quick response from our team",
 ];
