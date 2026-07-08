@@ -25,15 +25,16 @@ export default function OurMission() {
             
           }}
         >
-          We build reliable, scalable solutions that businesses actually enjoy
-          working with.
+          We build reliable, scalable digital solutions that empower businesses
+          to innovate, adapt, and achieve sustainable growth.
           <br />
           <br />
-          Our mission is to drive digital transformation forward—combining
-          strategic thinking, modern engineering, and innovative technology to
-          deliver lasting business impact.
+          Our mission is to accelerate digital transformation through strategic
+          thinking, modern engineering, and innovative technology—delivering
+          measurable outcomes that create lasting business value.  
         </p>
       </div>
     </CommonLayout>
   );
 }
+          
