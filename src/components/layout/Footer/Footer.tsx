@@ -3,8 +3,11 @@ import Image from "next/image";
 import {
   RiLinkedinFill,
   RiInstagramFill,
-  RiTiktokFill,
+  RiFacebookFill,
+  RiPhoneFill,
 } from "react-icons/ri";
+import { IoIosMail } from "react-icons/io";
+import SocialButton from "@/components/ui/SocialButton";
 
 const companyLinks = [
   { label: "Services", href: "/services" },
@@ -23,9 +26,11 @@ const serviceLinks = [
 ];
 
 const socialLinks = [
-  { icon: RiLinkedinFill, href: "https://linkedin.com", label: "LinkedIn" },
-  { icon: RiInstagramFill, href: "https://instagram.com", label: "Instagram" },
-  { icon: RiTiktokFill, href: "https://tiktok.com", label: "TikTok" },
+  { icon: RiLinkedinFill, href: "https://www.linkedin.com/company/sabirudev", label: "LinkedIn" },
+  { icon: RiInstagramFill, href: "https://www.instagram.com/sabirudev/", label: "Instagram" },
+  { icon: RiFacebookFill, href: "https://www.facebook.com/samudrabirudevelop/", label: "Facebook" },
+  { icon: RiPhoneFill, href: "tel:+6282242698548", label: "Phone", copyValue: "0822 4269 8548" },
+  { icon: IoIosMail, href: "mailto:samudrabirudevelop@gmail.com", label: "Email", copyValue: "samudrabirudevelop@gmail.com" },
 ];
 
 export default function Footer() {
@@ -52,7 +57,7 @@ export default function Footer() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12">
+      <div className="relative z-10 mx-auto px-6 sm:px-8 lg:px-12">
         {/* Top Section: Logo + Links */}
         <div className="flex flex-col lg:flex-row justify-between items-start gap-12 py-8">
           {/* Logo */}
@@ -108,17 +113,10 @@ export default function Footer() {
         {/* Social Section */}
         <div className="flex justify-start lg:justify-end py-6">
           <div className="flex gap-2.5">
-            {socialLinks.map(({ icon: Icon, href, label }) => (
-              <Link
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-[50px] h-[50px] rounded-full border border-white flex items-center justify-center hover:bg-white hover:text-water-900 transition-colors"
-                aria-label={label}
-              >
+            {socialLinks.map(({ icon: Icon, href, label, copyValue }) => (
+              <SocialButton key={label} href={href} aria-label={label} copyValue={copyValue}>
                 <Icon size={24} />
-              </Link>
+              </SocialButton>
             ))}
           </div>
         </div>

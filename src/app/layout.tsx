@@ -35,11 +35,12 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} h-full antialiased`}
     >
       <body
+      className="bg-water-900"
       style={{ fontFamily: "var(--font-inter)" }}
     >
       <LenisProvider>
         <Navbar />
-        <main className="flex-grow">
+        <main className="flex-grow bg-water-900">
           {children}
         </main>
       </LenisProvider>
