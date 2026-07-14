@@ -5,13 +5,23 @@ import Headline from "@/components/shared/Headline";
 import WhyChooseUs from "@/components/sections/home/WhyChooseUs";
 import Partners from "@/components/shared/Partners";
 import CTA from "@/components/shared/CTA";
-import Footer from "@/components/layout/Footer";
+import { getHomepage } from "@/lib/strapi-services";
 
-export default function Home() {
+export default async function Home() {
+  const homepageData = await getHomepage();
+  const blocks = homepageData?.pageBlocks || [];
+
+  // Find blocks by their Strapi component names
+  const heroBlock = blocks.find((b: any) => b.__component === "blocks.hero");
+  const aboutHeadlineBlock = blocks.find((b: any) => b.__component === "blocks.about-headline");
+  const solutionsBlock = blocks.find((b: any) => b.__component === "blocks.solutions");
+  const whyChooseUsBlock = blocks.find((b: any) => b.__component === "blocks.why-choose-us");
+
+
   return (
     <div className="flex flex-col min-h-screen bg-transparent">
       <HeroHeader
-        title={
+        title={heroBlock?.title || (
           <>
             Digital Innovation.
             <br />
@@ -19,17 +29,20 @@ export default function Home() {
             <br />
             Business.
           </>
-        }
+        )}
+        subtitle={heroBlock?.subtitle}
         variant="home"
       />
       <HeroFooter />
-      <AboutHeadline />
-      <AboutPreview />
-      <Headline text="Why Busiesses Choose Us?" />
-      <WhyChooseUs />
+      <AboutHeadline 
+        headline={aboutHeadlineBlock?.headline} 
+        description={aboutHeadlineBlock?.description} 
+      />
+      <AboutPreview items={solutionsBlock?.items} />
+      <Headline text={whyChooseUsBlock?.headline || "Why Businesses Choose Us?"} />
+      <WhyChooseUs items={whyChooseUsBlock?.items} />
       <Partners />
       <CTA />
-      <Footer />
     </div>
   );
 }

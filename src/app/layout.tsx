@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 import LenisProvider from "@/components/layout/LenisProvider";
+import { getSiteSettings } from "@/lib/strapi-services";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,26 +26,30 @@ export const metadata: Metadata = {
   description: "Membangun solusi digital terbaik untuk masa depan bisnis Anda.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const settings = await getSiteSettings();
+
   return (
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} h-full antialiased`}
     >
       <body
-      className="bg-water-900"
-      style={{ fontFamily: "var(--font-inter)" }}
-    >
-      <LenisProvider>
-        <Navbar />
-        <main className="flex-grow bg-water-900">
-          {children}
-        </main>
-      </LenisProvider>
+        className="bg-water-900"
+        style={{ fontFamily: "var(--font-inter)" }}
+        suppressHydrationWarning
+      >
+        <LenisProvider>
+          <Navbar settings={settings} />
+          <main className="flex-grow bg-water-900">
+            {children}
+          </main>
+          <Footer settings={settings} />
+        </LenisProvider>
       </body>
     </html>
   );

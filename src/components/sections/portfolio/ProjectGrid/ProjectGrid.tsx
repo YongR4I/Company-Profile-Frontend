@@ -3,10 +3,15 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { portfolioData } from "@/data/portfolio";
+import { PortfolioItem } from "@/types/portfolio";
 
 const INITIAL_VISIBLE = 4;
 
-export default function ProjectGrid() {
+interface ProjectGridProps {
+  projects?: PortfolioItem[];
+}
+
+export default function ProjectGrid({ projects }: ProjectGridProps) {
   const [showAll, setShowAll] = useState(false);
   const sectionRef = React.useRef<HTMLElement>(null);
 
@@ -15,30 +20,40 @@ export default function ProjectGrid() {
     sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
+  // Use passed projects or fallback to default data
+  const displayProjects = projects ?? portfolioData;
+
   const visibleProjects = showAll
-    ? portfolioData
-    : portfolioData.slice(0, INITIAL_VISIBLE);
+    ? displayProjects
+    : displayProjects.slice(0, INITIAL_VISIBLE);
 
   return (
     <section ref={sectionRef} className="w-full bg-[#040A0C] border-t border-[#132731] relative">
       <div className={`relative overflow-hidden ${!showAll ? "pb-32" : ""}`}>
         <div className="grid grid-cols-1 md:grid-cols-2">
           {visibleProjects.map((project, index) => (
-            <div 
-              key={project.id} 
-              className={`p-8 md:p-12 lg:p-16 flex flex-col gap-6 bg-transparent hover:bg-white/5
+            <div
+              key={project.id}
+              className={`p-8 md:p-12 lg:p-16 flex flex-col gap-6 bg-transparent
                 ${index % 2 === 0 ? "md:border-r border-[#132731]" : ""}
                 ${index < Math.ceil(visibleProjects.length / 2) * 2 - 2 ? "border-b border-[#132731]" : ""}
               `}
             >
-              <div className="relative w-full aspect-[4/3] rounded-[18px] overflow-hidden">
-                <Image 
-                  src={project.imageUrl} 
-                  alt={project.title}
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute top-0 left-0 z-10">
+              <div className="relative w-full aspect-[4/3] rounded-[18px] overflow-hidden bg-[#0a1a20]">
+                {project.imageUrl ? (
+                  <Image 
+                    src={project.imageUrl} 
+                    alt={project.title}
+                    fill
+                    className="object-cover"
+                    unoptimized
+                  />
+                ) : (
+                  <div className="absolute inset-0 flex items-center justify-center text-gray-600 text-sm">
+                    No Image
+                  </div>
+                )}
+                <div className="absolute top-4 left-4 z-10">
                   <div className="bg-white/10 backdrop-blur-md border border-white/20 text-white text-sm px-6 py-2 rounded-full">
                     {project.category}
                   </div>
@@ -69,7 +84,7 @@ export default function ProjectGrid() {
           ))}
         </div>
 
-        {!showAll && portfolioData.length > INITIAL_VISIBLE && (
+        {!showAll && displayProjects.length > INITIAL_VISIBLE && (
           <>
             <div className="absolute bottom-0 left-0 w-full h-48 pointer-events-none bg-gradient-to-b from-transparent to-[#040A0C]" />
             <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
@@ -96,7 +111,7 @@ export default function ProjectGrid() {
           </>
         )}
 
-        {showAll && portfolioData.length > INITIAL_VISIBLE && (
+        {showAll && displayProjects.length > INITIAL_VISIBLE && (
           <div className="w-full flex justify-center py-16">
             <button
               onClick={handleShowLess}

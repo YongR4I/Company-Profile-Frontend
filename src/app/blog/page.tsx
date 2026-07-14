@@ -2,7 +2,6 @@ import HeroHeader from "@/components/shared/HeroHeader";
 import BlogGrid from "@/components/sections/blog/BlogGrid";
 import Partners from "@/components/shared/Partners";
 import CTA from "@/components/shared/CTA";
-import Footer from "@/components/layout/Footer";
 import { getBlogPosts, getBlogPage } from "@/lib/strapi-services";
 import { toBlogPost } from "@/lib/mappers";
 
@@ -26,7 +25,6 @@ export default async function BlogPage() {
       <BlogGrid posts={posts.map(toBlogPost)} />
       <Partners />
       <CTA />
-      <Footer />
     </div>
   );
 }

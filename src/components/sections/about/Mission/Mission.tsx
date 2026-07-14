@@ -1,7 +1,12 @@
 import CommonLayout from "@/components/layout/CommonLayout";
 import React from "react";
 
-export default function Mission() {
+interface MissionProps {
+  label?: string;
+  text?: string;
+}
+
+export default function Mission({ label, text }: MissionProps) {
   return (
     <CommonLayout className="h-fit! flex-col items-start justify-center py-16 md:py-24">
       <div className="w-full text-left">
@@ -14,10 +19,10 @@ export default function Mission() {
             lineHeight: 1.2,
           }}
         >
-          Our Mission
+          {label || "Our Mission"}
         </span>
         <p
-          className="text-white font-medium w-4/5"
+          className="text-white font-medium w-4/5 whitespace-pre-line"
           style={{
             fontFamily: "var(--font-inter)",
             fontSize: "clamp(24px, 4vw, 56px)",
@@ -25,13 +30,17 @@ export default function Mission() {
             letterSpacing: "-0.02em",
           }}
         >
-          We build reliable, scalable digital solutions that empower businesses
-          to innovate, adapt, and achieve sustainable growth.
-          <br />
-          <br />
-          Our mission is to accelerate digital transformation through strategic
-          thinking, modern engineering, and innovative technology—delivering
-          measurable outcomes that create lasting business value.
+          {text || (
+            <>
+              We build reliable, scalable digital solutions that empower businesses
+              to innovate, adapt, and achieve sustainable growth.
+              <br />
+              <br />
+              Our mission is to accelerate digital transformation through strategic
+              thinking, modern engineering, and innovative technology—delivering
+              measurable outcomes that create lasting business value.
+            </>
+          )}
         </p>
       </div>
     </CommonLayout>

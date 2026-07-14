@@ -5,7 +5,7 @@ export const servicesData: ServiceItem[] = [
     id: "web-development",
     title: "Web Development",
     description: "Building modern, responsive, and high-performance web applications tailored to your business needs.",
-    iconName: "Laptop",
+    iconUrl: "/icons/services/Vector.svg",
     features: [
       "Custom React / Next.js Apps",
       "E-Commerce Solutions",
@@ -17,7 +17,7 @@ export const servicesData: ServiceItem[] = [
     id: "mobile-development",
     title: "Mobile App Development",
     description: "Creating seamless native and cross-platform mobile experiences for iOS and Android platforms.",
-    iconName: "Smartphone",
+    iconUrl: "/icons/services/Vector-1.svg",
     features: [
       "React Native Apps",
       "Flutter Apps",
@@ -29,7 +29,7 @@ export const servicesData: ServiceItem[] = [
     id: "ui-ux-design",
     title: "UI/UX Design",
     description: "Crafting beautiful, intuitive, and user-centered interfaces that drive engagement and conversion.",
-    iconName: "Palette",
+    iconUrl: "/icons/services/Vector-2.svg",
     features: [
       "Wireframing & Prototyping",
       "User Research & Testing",

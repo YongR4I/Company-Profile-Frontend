@@ -31,7 +31,7 @@ const DEFAULT_POPULATE = 'populate=*';
 
 export async function getSiteSettings(): Promise<SiteSettings | null> {
   try {
-    const res = await fetchApi<StrapiResponse<SiteSettings>>(`/site-setting?${DEFAULT_POPULATE}`);
+    const res = await fetchApi<StrapiResponse<SiteSettings>>(`/site-setting?populate[0]=navLinks&populate[1]=socialLinks&populate[2]=footerCompanyLinks&populate[3]=footerServiceLinks&populate[4]=logo`);
     return res.data;
   } catch (e) {
     return null;
@@ -40,7 +40,7 @@ export async function getSiteSettings(): Promise<SiteSettings | null> {
 
 export async function getHomepage(): Promise<Homepage | null> {
   try {
-    const res = await fetchApi<StrapiResponse<Homepage>>(`/homepage?${DEFAULT_POPULATE}`);
+    const res = await fetchApi<StrapiResponse<Homepage>>(`/homepage?populate[pageBlocks][populate]=*`);
     return res.data;
   } catch (e) {
     return null;
@@ -49,7 +49,7 @@ export async function getHomepage(): Promise<Homepage | null> {
 
 export async function getAboutPage(): Promise<AboutPage | null> {
   try {
-    const res = await fetchApi<StrapiResponse<AboutPage>>(`/about-page?${DEFAULT_POPULATE}`);
+    const res = await fetchApi<StrapiResponse<AboutPage>>(`/about-page?populate[0]=processSteps`);
     return res.data;
   } catch (e) {
     return null;
@@ -94,7 +94,7 @@ export async function getContactPage(): Promise<ContactPage | null> {
 
 export async function getPartnerPage(): Promise<PartnerPage | null> {
   try {
-    const res = await fetchApi<StrapiResponse<PartnerPage>>(`/partner?${DEFAULT_POPULATE}`);
+    const res = await fetchApi<StrapiResponse<PartnerPage>>(`/partner?populate[0]=partnerList.logo`);
     return res.data;
   } catch (e) {
     return null;
@@ -114,7 +114,7 @@ export async function getCta(): Promise<Cta | null> {
 
 export async function getServices(): Promise<Service[]> {
   try {
-    const res = await fetchApi<StrapiResponse<Service[]>>(`/services?${DEFAULT_POPULATE}`);
+    const res = await fetchApi<StrapiResponse<Service[]>>(`/services?populate[0]=features&populate[1]=icon`);
     return res.data;
   } catch (e) {
     return [];
@@ -123,7 +123,7 @@ export async function getServices(): Promise<Service[]> {
 
 export async function getServiceBySlug(slug: string): Promise<Service | null> {
   try {
-    const res = await fetchApi<StrapiResponse<Service[]>>(`/services?filters[slug][$eq]=${slug}&${DEFAULT_POPULATE}`);
+    const res = await fetchApi<StrapiResponse<Service[]>>(`/services?filters[slug][$eq]=${slug}&populate[0]=features&populate[1]=icon`);
     return res.data[0] || null;
   } catch (e) {
     return null;
@@ -132,7 +132,7 @@ export async function getServiceBySlug(slug: string): Promise<Service | null> {
 
 export async function getPortfolios(): Promise<Portfolio[]> {
   try {
-    const res = await fetchApi<StrapiResponse<Portfolio[]>>(`/portfolios?${DEFAULT_POPULATE}`);
+    const res = await fetchApi<StrapiResponse<Portfolio[]>>(`/portfolios?populate[0]=category&populate[1]=technologies&populate[2]=image`);
     return res.data;
   } catch (e) {
     return [];
@@ -141,7 +141,7 @@ export async function getPortfolios(): Promise<Portfolio[]> {
 
 export async function getPortfolioBySlug(slug: string): Promise<Portfolio | null> {
   try {
-    const res = await fetchApi<StrapiResponse<Portfolio[]>>(`/portfolios?filters[slug][$eq]=${slug}&${DEFAULT_POPULATE}`);
+    const res = await fetchApi<StrapiResponse<Portfolio[]>>(`/portfolios?filters[slug][$eq]=${slug}&populate[0]=category&populate[1]=technologies&populate[2]=image`);
     return res.data[0] || null;
   } catch (e) {
     return null;

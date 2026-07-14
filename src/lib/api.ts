@@ -65,14 +65,16 @@ export async function fetchApi<T>(path: string, options: FetchApiOptions = {}): 
     const response = await fetch(url, config);
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
-      console.error('Strapi API Error:', errorData);
+      // Use console.warn instead of console.error to avoid triggering the Next.js Dev Overlay
+      console.warn(`Strapi API Warning (${response.status}):`, errorData);
       throw new Error(`An error occurred: ${response.statusText}`);
     }
 
     const data = await response.json();
     return data as T;
   } catch (error) {
-    console.error(`Fetch API Failed for path: ${path}`, error);
+    // Also use console.warn here for the same reason
+    console.warn(`Fetch API Failed for path: ${path}`, (error as Error).message);
     throw error;
   }
 }

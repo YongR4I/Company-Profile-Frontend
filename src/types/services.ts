@@ -2,6 +2,6 @@ export interface ServiceItem {
   id: string;
   title: string;
   description: string;
-  iconName: string; // Dynamic icon reference (e.g. lucide icon name)
+  iconUrl: string; // URL from Strapi media
   features: string[]; // Key features or sub-services
 }

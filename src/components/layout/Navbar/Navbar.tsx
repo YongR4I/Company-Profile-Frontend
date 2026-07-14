@@ -3,15 +3,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import {
-  RiTwitterXFill,
-  RiLinkedinFill,
-  RiYoutubeFill,
-  RiFacebookFill,
-  RiGithubFill,
-} from "react-icons/ri";
+import { SiteSettings } from "@/types/strapi";
+import { strapiImageUrl } from "@/lib/mappers";
 
-const menuItems = [
+const defaultMenuItems = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
   { label: "Portfolio", href: "/portfolio" },
@@ -20,15 +15,11 @@ const menuItems = [
   { label: "Contact Us", href: "/contact" },
 ];
 
-const socialLinks = [
-  { icon: RiTwitterXFill, href: "https://x.com", label: "X" },
-  { icon: RiLinkedinFill, href: "https://linkedin.com", label: "LinkedIn" },
-  { icon: RiYoutubeFill, href: "https://youtube.com", label: "YouTube" },
-  { icon: RiFacebookFill, href: "https://facebook.com", label: "Facebook" },
-  { icon: RiGithubFill, href: "https://github.com", label: "GitHub" },
-];
+interface NavbarProps {
+  settings?: SiteSettings | null;
+}
 
-export default function Navbar() {
+export default function Navbar({ settings }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -69,6 +60,12 @@ export default function Navbar() {
     return () => observer.disconnect();
   }, []);
 
+  const displayMenu = settings?.navLinks?.length 
+    ? settings.navLinks.filter(l => l.label && l.href).map(l => ({ label: l.label!, href: l.href! })) 
+    : defaultMenuItems;
+
+  const logoUrl = settings?.logo ? strapiImageUrl(settings.logo) : "/images/branding/logo.png";
+
   return (
     <>
       <nav className={`fixed top-0 left-0 w-full z-50 flex items-center justify-between px-6 md:px-8 py-5 transition-all duration-300 ${
@@ -79,10 +76,11 @@ export default function Navbar() {
         <div className="flex-shrink-0 flex items-center">
           <Link href="/" onClick={() => setIsOpen(false)}>
             <Image
-              src="/images/branding/logo.png"
-              alt="Sabiru Logo"
+              src={logoUrl}
+              alt="Brand Logo"
               width={80}
               height={28}
+              unoptimized
               className="object-contain"
             />
           </Link>
@@ -91,7 +89,7 @@ export default function Navbar() {
         {/* Desktop links */}
         <div className="hidden md:flex items-center gap-8">
           <div className="flex items-center gap-[15px]">
-            {menuItems.filter(item => item.label !== "Home" && item.label !== "Contact Us").map((item) => (
+            {displayMenu.filter(item => item.label.toLowerCase() !== "home" && item.label.toLowerCase() !== "contact us").map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
@@ -163,7 +161,7 @@ export default function Navbar() {
 
       {/* Mobile Drawer Overlay */}
       <div
-        className={`fixed inset-0 z-98 bg-[#040A0C] flex flex-col justify-between px-8 py-16 pt-32 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] md:hidden ${
+        className={`fixed inset-0 z-[98] bg-[#040A0C] flex flex-col px-8 py-16 pt-32 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] md:hidden ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -172,8 +170,8 @@ export default function Navbar() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_right_bottom,_rgba(73,166,204,0.08)_0%,_transparent_50%)] pointer-events-none z-0" />
 
         {/* Navigation Links */}
-        <div className="relative z-10 flex flex-col items-start gap-4 mt-8">
-          {menuItems.map((item, index) => (
+        <div className="relative z-10 flex flex-col items-start gap-4 mt-8 overflow-y-auto">
+          {displayMenu.map((item, index) => (
             <Link
               key={item.label}
               href={item.href}
@@ -190,30 +188,8 @@ export default function Navbar() {
             </Link>
           ))}
         </div>
-
-        {/* Social Links Footer */}
-        <div
-          className={`relative z-10 flex flex-row gap-3 items-center justify-start transition-all duration-500 ${
-            isOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
-          style={{
-            transitionDelay: `${isOpen ? menuItems.length * 50 + 150 : 0}ms`,
-          }}
-        >
-          {socialLinks.map(({ icon: Icon, href, label }) => (
-            <Link
-              key={label}
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-12 h-12 rounded-full border border-white/20 hover:border-white/80 flex items-center justify-center text-white/60 hover:text-white transition-all duration-300 bg-white/5 hover:bg-white/10"
-              aria-label={label}
-            >
-              <Icon size={20} />
-            </Link>
-          ))}
-        </div>
       </div>
     </>
   );
 }
+

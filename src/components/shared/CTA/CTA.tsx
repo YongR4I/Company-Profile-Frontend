@@ -2,6 +2,7 @@ import CommonLayout from '@/components/layout/CommonLayout';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+import { getCta } from '@/lib/strapi-services';
 
 function ArrowOutwardIcon({ className }: { className?: string }) {
   return (
@@ -31,24 +32,14 @@ function ArrowOutwardIcon({ className }: { className?: string }) {
   );
 }
 
-export interface CTAProps {
-  title?: React.ReactNode;
-  description?: string;
-  buttonText?: string;
-  href?: string;
-}
+export default async function CTA() {
+  const ctaData = await getCta();
 
-export default function CTA({
-  title = (
-    <>
-      Ready to Transform Your <br />
-      <span className="italic">Business?</span>
-    </>
-  ),
-  description = "Our clients trust us to transform ideas into scalable digital solutions. Now it's your turn to build with confidence.",
-  buttonText = "Let's Talk",
-  href = "/contact",
-}: CTAProps) {
+  const title = ctaData?.title || "Ready to Transform Your Business?";
+  const description = ctaData?.description || "Our clients trust us to transform ideas into scalable digital solutions. Now it's your turn to build with confidence.";
+  const buttonText = ctaData?.buttonText || "Let's Talk";
+  const href = ctaData?.buttonHref || "/contact";
+
   return (
     <CommonLayout className="h-fit! px-6 sm:px-10 py-10 items-center justify-center">
       <div

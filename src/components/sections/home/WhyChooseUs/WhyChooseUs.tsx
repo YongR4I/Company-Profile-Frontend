@@ -1,8 +1,10 @@
 import CommonLayout from "@/components/layout/CommonLayout";
 import Image from "next/image";
 import React from "react";
+import { WhyChooseItem } from "@/types/strapi";
+import { toWhyCard } from "@/lib/mappers";
 
-const whyCards = [
+const defaultWhyCards = [
   {
     number: "1",
     title: "Start with a Free Consultation",
@@ -59,7 +61,15 @@ function WhyCard({
   );
 }
 
-export default function WhyChooseUs() {
+interface WhyChooseUsProps {
+  items?: WhyChooseItem[];
+}
+
+export default function WhyChooseUs({ items }: WhyChooseUsProps) {
+  const displayCards = items && items.length > 0
+    ? items.map(toWhyCard)
+    : defaultWhyCards;
+
   return (
     <CommonLayout
       id="whyus-section"
@@ -81,20 +91,20 @@ export default function WhyChooseUs() {
         <div className="hidden lg:flex flex-row items-center justify-between gap-[180px]">
           {/* Left Section */}
           <div className="flex flex-col gap-40">
-            <WhyCard {...whyCards[1]} className="translate-x-[10vw]" />
-            <WhyCard {...whyCards[0]} />
+            {displayCards[1] && <WhyCard {...displayCards[1]} className="translate-x-[10vw]" />}
+            {displayCards[0] && <WhyCard {...displayCards[0]} />}
           </div>
           {/* Right Section */}
           <div className="flex flex-col gap-40">
-            <WhyCard {...whyCards[2]} className="translate-x-[-10vw]" />
-            <WhyCard {...whyCards[3]} />
+            {displayCards[2] && <WhyCard {...displayCards[2]} className="translate-x-[-10vw]" />}
+            {displayCards[3] && <WhyCard {...displayCards[3]} />}
           </div>
         </div>
 
         {/* Mobile / Tablet: Single column centered */}
         <div className="flex lg:hidden flex-col gap-[30px] items-center w-full">
-          {whyCards.map((card) => (
-            <WhyCard key={card.number} {...card} />
+          {displayCards.map((card, index) => (
+            <WhyCard key={card.number || index} {...card} />
           ))}
         </div>
 

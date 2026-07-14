@@ -1,13 +1,19 @@
 "use client";
 
 import CommonLayout from "@/components/layout/CommonLayout";
-import React, { useState } from "react";
+import React from "react";
 
-const categories = ["All Projects", "Company Profile", "E-Commerce", "CMS", "POS"];
+interface PortfolioHeroFooterProps {
+  categories: string[];
+  activeCategory: string;
+  onCategoryChange: (cat: string) => void;
+}
 
-export default function PortfolioHeroFooter() {
-  const [activeCategory, setActiveCategory] = useState("All Projects");
-
+export default function PortfolioHeroFooter({ 
+  categories, 
+  activeCategory, 
+  onCategoryChange 
+}: PortfolioHeroFooterProps) {
   return (
     <CommonLayout
       className="bg-[#040A0C] flex flex-row items-center justify-between !h-auto py-8 border-b border-[#132731]"
@@ -20,7 +26,7 @@ export default function PortfolioHeroFooter() {
           return (
             <button
               key={category}
-              onClick={() => setActiveCategory(category)}
+              onClick={() => onCategoryChange(category)}
               className={`whitespace-nowrap transition-all duration-300 font-medium text-[clamp(16px,1.5vw,22px)] ${
                 isActive
                   ? "bg-[#132731] hover:bg-[#1c3645] text-white px-8 md:px-10 py-3 rounded-full"

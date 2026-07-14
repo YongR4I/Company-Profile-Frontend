@@ -1,37 +1,34 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from "react";
 import Image from "next/image";
 import CommonLayout from "@/components/layout/CommonLayout";
 import HeadlineChild from "@/components/shared/HeadlineChild";
+import { getPartnerPage } from "@/lib/strapi-services";
+import { toPartnerCard } from "@/lib/mappers";
 
-const partners = [
-  { id: 1, image: "/images/shared/partners/partner-1.png", isEmpty: false },
-  { id: 2, image: "/images/shared/partners/partner-2.png", isEmpty: false },
-  { id: "empty-1", image: "", isEmpty: true },
-  { id: 3, image: "/images/shared/partners/partner-3.png", isEmpty: false },
-  { id: 4, image: "/images/shared/partners/partner-4.png", isEmpty: false },
-  { id: "empty-2", image: "", isEmpty: true },
-  { id: 5, image: "/images/shared/partners/partner-5.png", isEmpty: false },
-  { id: 6, image: "/images/shared/partners/partner-6.png", isEmpty: false },
-  { id: "empty-3", image: "", isEmpty: true },
-  { id: 7, image: "/images/shared/partners/partner-7.png", isEmpty: false },
-  { id: 8, image: "/images/shared/partners/partner-8.png", isEmpty: false },
-  { id: "empty-4", image: "", isEmpty: true },
+// Static fallback data — used only when Strapi has no data
+const defaultPartners = [
+  { name: "Partner 1", logoUrl: "/images/shared/partners/partner-1.png", websiteUrl: undefined },
+  { name: "Partner 2", logoUrl: "/images/shared/partners/partner-2.png", websiteUrl: undefined },
+  { name: "Partner 3", logoUrl: "/images/shared/partners/partner-3.png", websiteUrl: undefined },
+  { name: "Partner 4", logoUrl: "/images/shared/partners/partner-4.png", websiteUrl: undefined },
+  { name: "Partner 5", logoUrl: "/images/shared/partners/partner-5.png", websiteUrl: undefined },
+  { name: "Partner 6", logoUrl: "/images/shared/partners/partner-6.png", websiteUrl: undefined },
+  { name: "Partner 7", logoUrl: "/images/shared/partners/partner-7.png", websiteUrl: undefined },
+  { name: "Partner 8", logoUrl: "/images/shared/partners/partner-8.png", websiteUrl: undefined },
 ];
 
-export interface PartnersProps {
-  title?: string;
-  description?: string;
-  autoplay?: boolean;
-  speed?: number;
-}
+export default async function Partners() {
+  const partnerPage = await getPartnerPage();
 
-export default function Partners({
-  title = "Partners in innovation",
-  description = "Our clients trust us to transform ideas into scalable digital solutions. Now it's your turn to build with confidence.",
-  autoplay: _autoplay = true,
-  speed: _speed = 40,
-}: PartnersProps) {
+  const title = partnerPage?.title || "Partners in innovation";
+  const description = partnerPage?.description || "Our clients trust us to transform ideas into scalable digital solutions. Now it's your turn to build with confidence.";
+
+  // Use Strapi partners if available, otherwise fall back to static
+  const partners =
+    partnerPage?.partnerList && partnerPage.partnerList.length > 0
+      ? partnerPage.partnerList.map(toPartnerCard)
+      : defaultPartners;
+
   return (
     <>
       <HeadlineChild className="flex flex-col items-start justify-start gap-5 mt-12 mb-6 md:mt-20 md:mb-10">
@@ -57,28 +54,42 @@ export default function Partners({
           />
 
           <div className="relative z-10 grid grid-cols-2 lg:grid-cols-4 gap-[15px] sm:gap-[20px]">
-            {partners.map((partner) =>
-              partner.isEmpty ? (
+            {partners.map((partner, index) => {
+              const card = (
                 <div
-                  key={partner.id}
-                  className="hidden lg:block h-[243px] rounded-[20px] border border-transparent p-[10px]"
-                />
-              ) : (
-                <div
-                  key={partner.id}
-                  className="h-[120px] sm:h-[180px] lg:h-[243px] rounded-[1.25rem] border border-water-600/70 p-[15px] sm:p-[30px] flex items-center justify-center overflow-hidden hover:border-water-600 transition-all duration-300 bg-[radial-gradient(86.71%_79.65%_at_9.6%_100.14%,_#132F3B_0%,_#071115_100%)]
-                  hover:bg-[radial-gradient(86.71%_79.65%_at_9.6%_100.14%,_#194152_0%,_#071115_100%)] hover:scale-105"
+                  key={index}
+                  className="h-[120px] sm:h-[180px] lg:h-[243px] rounded-[1.25rem] border border-water-600/70 p-[15px] sm:p-[30px] flex items-center justify-center overflow-hidden hover:border-water-600 transition-all duration-300 bg-[radial-gradient(86.71%_79.65%_at_9.6%_100.14%,_#132F3B_0%,_#071115_100%)] hover:bg-[radial-gradient(86.71%_79.65%_at_9.6%_100.14%,_#194152_0%,_#071115_100%)] hover:scale-105"
                 >
-                  <Image
-                    src={partner.image}
-                    alt={`Partner ${partner.id}`}
-                    width={280}
-                    height={180}
-                    className="max-h-full w-auto object-contain"
-                  />
+                  {partner.logoUrl ? (
+                    <Image
+                      src={partner.logoUrl}
+                      alt={partner.name}
+                      width={280}
+                      height={180}
+                      className="max-h-full w-auto object-contain"
+                      unoptimized={partner.logoUrl.startsWith("http")}
+                    />
+                  ) : (
+                    <span className="text-gray-500 text-sm">{partner.name}</span>
+                  )}
                 </div>
-              )
-            )}
+              );
+
+              // Wrap in anchor if websiteUrl exists
+              return partner.websiteUrl ? (
+                <a
+                  key={index}
+                  href={partner.websiteUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block"
+                >
+                  {card}
+                </a>
+              ) : (
+                <React.Fragment key={index}>{card}</React.Fragment>
+              );
+            })}
           </div>
         </div>
       </CommonLayout>

@@ -5,11 +5,16 @@ import {
   RiInstagramFill,
   RiFacebookFill,
   RiPhoneFill,
+  RiTwitterXFill,
+  RiYoutubeFill,
 } from "react-icons/ri";
+import { FaWhatsapp, FaTiktok } from "react-icons/fa";
 import { IoIosMail } from "react-icons/io";
 import SocialButton from "@/components/ui/SocialButton";
+import { SiteSettings } from "@/types/strapi";
+import { strapiImageUrl } from "@/lib/mappers";
 
-const companyLinks = [
+const defaultCompanyLinks = [
   { label: "Services", href: "/services" },
   { label: "Portfolio", href: "/portfolio" },
   { label: "About", href: "/about" },
@@ -17,15 +22,15 @@ const companyLinks = [
   { label: "Contact", href: "/contact" },
 ];
 
-const serviceLinks = [
-  "Digital Transformation",
-  "Software Development",
-  "IT Consulting",
-  "System Integration",
-  "Managed Support",
+const defaultServiceLinks = [
+  { label: "Digital Transformation", href: "/services" },
+  { label: "Software Development", href: "/services" },
+  { label: "IT Consulting", href: "/services" },
+  { label: "System Integration", href: "/services" },
+  { label: "Managed Support", href: "/services" },
 ];
 
-const socialLinks = [
+const defaultSocialLinks = [
   { icon: RiLinkedinFill, href: "https://www.linkedin.com/company/sabirudev", label: "LinkedIn" },
   { icon: RiInstagramFill, href: "https://www.instagram.com/sabirudev/", label: "Instagram" },
   { icon: RiFacebookFill, href: "https://www.facebook.com/samudrabirudevelop/", label: "Facebook" },
@@ -33,7 +38,44 @@ const socialLinks = [
   { icon: IoIosMail, href: "mailto:samudrabirudevelop@gmail.com", label: "Email", copyValue: "samudrabirudevelop@gmail.com" },
 ];
 
-export default function Footer() {
+function getSocialIcon(platform: string) {
+  switch (platform) {
+    case 'Facebook': return RiFacebookFill;
+    case 'Instagram': return RiInstagramFill;
+    case 'LinkedIn': return RiLinkedinFill;
+    case 'YouTube': return RiYoutubeFill;
+    case 'X_Twitter': return RiTwitterXFill;
+    case 'WhatsApp': return FaWhatsapp;
+    case 'TikTok': return FaTiktok;
+    default: return RiTwitterXFill;
+  }
+}
+
+interface FooterProps {
+  settings?: SiteSettings | null;
+}
+
+export default function Footer({ settings }: FooterProps) {
+  const companyLinks = settings?.footerCompanyLinks?.length 
+    ? settings.footerCompanyLinks.map(l => ({ label: l.label, href: l.href }))
+    : defaultCompanyLinks;
+
+  const serviceLinks = settings?.footerServiceLinks?.length
+    ? settings.footerServiceLinks.map(s => ({ label: s.title, href: `/services/${s.slug}` }))
+    : defaultServiceLinks;
+
+  const socialLinks = settings?.socialLinks?.length
+    ? settings.socialLinks.map(l => ({
+        icon: getSocialIcon(l.platform),
+        href: l.url,
+        label: l.platform
+      }))
+    : defaultSocialLinks;
+
+  const logoUrl = settings?.logo ? strapiImageUrl(settings.logo) : "/images/shared/footer/logo.png";
+  const officeAddress = settings?.officeAddress || "Graha Mampang Lt.3 suite 305, Jl. Mampang Prpt. Raya No.KAV.100, RT.2/RW.1, Duren Tiga, Kec. Pancoran, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12760";
+  const workshopAddress = settings?.workshopAddress || "Alamat: Jl. Raya Sukahati Jl. Raya Karadenan, Sukahati, Kec. Cibinong, Kabupaten Bogor, Jawa Barat 16913";
+
   return (
     <footer className="relative bg-water-900 text-white overflow-hidden">
       {/* Background decorative elements */}
@@ -63,10 +105,11 @@ export default function Footer() {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Image
-              src="/images/shared/footer/logo.png"
-              alt="SA'RU Samudra Biru Dev Logo"
+              src={logoUrl}
+              alt="Brand Logo"
               width={210}
               height={210}
+              unoptimized
               className="object-contain w-[120px] h-[120px] sm:w-[210px] sm:h-[210px]"
             />
           </div>
@@ -100,9 +143,9 @@ export default function Footer() {
               <ul className="space-y-2.5">
                 {serviceLinks.map((item, index) => (
                   <li key={index}>
-                    <span className="text-heading-h4 md:text-heading-h3 font-normal text-white">
-                      {item}
-                    </span>
+                    <Link href={item.href} className="text-heading-h4 md:text-heading-h3 font-normal text-white hover:text-water-200 transition-colors">
+                      {item.label}
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -113,7 +156,7 @@ export default function Footer() {
         {/* Social Section */}
         <div className="flex justify-start lg:justify-end py-6">
           <div className="flex gap-2.5">
-            {socialLinks.map(({ icon: Icon, href, label, copyValue }) => (
+            {socialLinks.map(({ icon: Icon, href, label, copyValue }: any) => (
               <SocialButton key={label} href={href} aria-label={label} copyValue={copyValue}>
                 <Icon size={24} />
               </SocialButton>
@@ -128,10 +171,8 @@ export default function Footer() {
             <h4 className="text-heading-h5 font-medium text-water-200 mb-2">
               Office
             </h4>
-            <p className="text-body-base text-gray-400 leading-relaxed">
-              Graha Mampang Lt.3 suite 305, Jl. Mampang Prpt. Raya
-              No.KAV.100, RT.2/RW.1, Duren Tiga, Kec. Pancoran, Kota
-              Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12760
+            <p className="text-body-base text-gray-400 leading-relaxed whitespace-pre-line">
+              {officeAddress}
             </p>
           </div>
 
@@ -140,9 +181,8 @@ export default function Footer() {
             <h4 className="text-heading-h5 font-medium text-water-200 mb-2">
               Workshop
             </h4>
-            <p className="text-body-base text-gray-400 leading-relaxed">
-              Alamat: Jl. Raya Sukahati Jl. Raya Karadenan, Sukahati, Kec.
-              Cibinong, Kabupaten Bogor, Jawa Barat 16913
+            <p className="text-body-base text-gray-400 leading-relaxed whitespace-pre-line">
+              {workshopAddress}
             </p>
           </div>
         </div>
@@ -150,3 +190,4 @@ export default function Footer() {
     </footer>
   );
 }
+

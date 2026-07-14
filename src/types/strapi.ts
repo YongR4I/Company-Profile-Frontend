@@ -141,6 +141,7 @@ export interface SiteSettings {
   footerServiceLinks: Service[];
   officeAddress: string;
   workshopAddress: string;
+  heroFooterText: string;
 }
 
 export interface PartnerPage {
