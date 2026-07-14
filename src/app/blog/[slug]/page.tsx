@@ -1,9 +1,11 @@
 import { notFound } from "next/navigation";
-import { blogData } from "@/data/blog";
+import { getBlogPosts, getBlogPostBySlug } from "@/lib/strapi-services";
+import { toBlogPost } from "@/lib/mappers";
 import BlogDetail from "@/components/sections/blog/BlogDetail";
 
-export function generateStaticParams() {
-  return blogData.map((post) => ({
+export async function generateStaticParams() {
+  const posts = await getBlogPosts();
+  return posts.map((post) => ({
     slug: post.slug,
   }));
 }
@@ -14,11 +16,13 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = blogData.find((p) => p.slug === slug);
+  const strapiPost = await getBlogPostBySlug(slug);
 
-  if (!post) {
+  if (!strapiPost) {
     notFound();
   }
+
+  const post = toBlogPost(strapiPost);
 
   return (
     <div className="flex flex-col min-h-screen bg-water-900">

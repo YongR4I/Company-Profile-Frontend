@@ -3,8 +3,15 @@ import BlogGrid from "@/components/sections/blog/BlogGrid";
 import Partners from "@/components/shared/Partners";
 import CTA from "@/components/shared/CTA";
 import Footer from "@/components/layout/Footer";
+import { getBlogPosts, getBlogPage } from "@/lib/strapi-services";
+import { toBlogPost } from "@/lib/mappers";
 
-export default function BlogPage() {
+export default async function BlogPage() {
+  const [posts, page] = await Promise.all([
+    getBlogPosts(),
+    getBlogPage(),
+  ]);
+
   return (
     <div className="flex flex-col min-h-screen bg-water-900">
       <HeroHeader
@@ -13,10 +20,10 @@ export default function BlogPage() {
             Sabiru <span className="text-water-300">Blog</span>
           </>
         }
-        subtitle="What's on our mind"
+        subtitle={page?.heroSubtitle || "What's on our mind"}
         variant="subpage"
       />
-      <BlogGrid />
+      <BlogGrid posts={posts.map(toBlogPost)} />
       <Partners />
       <CTA />
       <Footer />
