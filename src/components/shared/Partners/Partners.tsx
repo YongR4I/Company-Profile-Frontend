@@ -4,6 +4,7 @@ import CommonLayout from "@/components/layout/CommonLayout";
 import HeadlineChild from "@/components/shared/HeadlineChild";
 import { getPartnerPage } from "@/lib/strapi-services";
 import { toPartnerCard } from "@/lib/mappers";
+import TextReveal from "@/components/ui/TextReveal";
 
 // Static fallback data — used only when Strapi has no data
 const defaultPartners = [
@@ -32,9 +33,16 @@ export default async function Partners() {
   return (
     <>
       <HeadlineChild className="flex flex-col items-start justify-start gap-5 mt-12 mb-6 md:mt-20 md:mb-10">
-        <h2 className="text-3xl sm:text-4xl md:text-display-sub w-full max-w-[600px] font-medium text-white">
+        <TextReveal
+          variant="blur-in"
+          as="h2"
+          delay={1500}
+          direction="right"
+          length={40}
+          className="text-3xl sm:text-4xl md:text-display-sub w-full max-w-[600px] font-medium text-white"
+        >
           {title}
-        </h2>
+        </TextReveal>
         {description && (
           <p className="text-body-large md:text-heading-h4 text-gray-400 w-full lg:w-1/2">
             {description}

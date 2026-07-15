@@ -1,5 +1,6 @@
 import React from "react";
 import CommonLayout from "@/components/layout/CommonLayout";
+import TextReveal from "@/components/ui/TextReveal";
 
 export interface HeroHeaderProps {
   title: React.ReactNode;
@@ -58,7 +59,13 @@ export default function HeroHeader({
     <CommonLayout className="!h-[300px] md:!h-[381px] !bg-water-900 items-end justify-center">
       <div className="w-full relative z-10 text-center flex flex-col items-center gap-2">
         {subtitle && (
-          <span
+          <TextReveal
+          variant="blur-in"
+          as="span"
+          delay={300}
+          direction="bottom"
+          length={40}
+          delayMode="line"
             className="text-white tracking-tighter"
             style={{
               fontFamily: "var(--font-inter)",
@@ -68,7 +75,7 @@ export default function HeroHeader({
             }}
           >
             {subtitle}
-          </span>
+          </TextReveal>
         )}
         <h1
           className="text-white font-medium italic tracking-tight leading-[1.1]"
