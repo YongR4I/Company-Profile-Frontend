@@ -68,7 +68,7 @@ export default function Navbar({ settings }: NavbarProps) {
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 w-full z-50 flex items-center justify-between px-6 md:px-8 py-5 transition-all duration-300 ${
+      <nav className={`fixed top-0 left-0 w-full z-[100] flex items-center justify-between px-6 md:px-8 py-5 transition-all duration-300 ${
         isScrolled
           ? "bg-water-900/80 backdrop-blur-md border-b border-water-300/10"
           : "bg-transparent border-b border-transparent"
@@ -128,7 +128,7 @@ export default function Navbar({ settings }: NavbarProps) {
 
         {/* Mobile Hamburger/Close Button */}
         <button
-          className="flex md:hidden items-center justify-center w-10 h-10 focus:outline-none z-100 relative text-white"
+          className="flex md:hidden items-center justify-center w-10 h-10 focus:outline-none relative z-[101] text-white"
           onClick={() => setIsOpen(!isOpen)}
           aria-label={isOpen ? "Close menu" : "Open menu"}
         >

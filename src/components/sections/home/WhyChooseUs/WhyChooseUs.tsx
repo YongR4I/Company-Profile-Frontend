@@ -108,7 +108,7 @@ export default function WhyChooseUs({ items }: WhyChooseUsProps) {
           ))}
         </div>
 
-        <div className="absolute left-0 w-full z-3 h-[90px] pointer-events-none bg-gradient-to-b from-transparent to-[#040A0C] to-80%" />
+        <div className="hidden lg:block absolute left-0 w-full z-3 h-[90px] pointer-events-none bg-gradient-to-b from-transparent to-[#040A0C] to-80%" />
 
         {/* Grid background */}
         <div
@@ -122,7 +122,7 @@ export default function WhyChooseUs({ items }: WhyChooseUsProps) {
 
         {/* Circle light gradient */}
         <div
-          className="absolute max-sm:hidden bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-[100rem] h-[100rem] z-0 pointer-events-none"
+          className="hidden lg:block absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-[100rem] h-[100rem] z-0 pointer-events-none"
           style={{
             borderRadius: "99rem",
             background: "radial-gradient(41.31% 41.31% at 50% 50%, #49A6CC 0%, rgba(73, 166, 204, 0.00) 100%)",

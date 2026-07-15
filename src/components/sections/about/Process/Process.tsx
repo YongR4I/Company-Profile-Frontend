@@ -9,28 +9,28 @@ const defaultProcessSteps = [
     title: "Share Your Vision",
     description: "Tell us your goals, challenges, and project requirements.",
     marginTop: "md:mt-0",
-    minHeight: "min-h-[500px] md:min-h-[600px]",
+    minHeight: "min-h-[300px] md:min-h-[600px]",
   },
   {
     number: "2",
     title: "Plan & Build",
     description: "We define the solution and begin development together.",
     marginTop: "md:mt-[40px]",
-    minHeight: "min-h-[520px] md:min-h-[640px]",
+    minHeight: "min-h-[300px] md:min-h-[640px]",
   },
   {
     number: "3",
     title: "Review & Refine",
     description: "Test, improve, and perfect every detail before launch.",
     marginTop: "md:mt-[80px]",
-    minHeight: "min-h-[540px] md:min-h-[680px]",
+    minHeight: "min-h-[300px] md:min-h-[680px]",
   },
   {
     number: "4",
     title: "Launch & Grow",
     description: "Go live with ongoing support for future growth.",
     marginTop: "md:mt-[120px]",
-    minHeight: "min-h-[560px] md:min-h-[720px]",
+    minHeight: "min-h-[300px] md:min-h-[720px]",
   },
 ];
 

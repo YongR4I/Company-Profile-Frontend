@@ -94,7 +94,7 @@ export default function Footer({ settings }: FooterProps) {
           alt=""
           width={900}
           height={900}
-          className="object-contain"
+          className="object-contain opacity-50 lg:opacity-100"
         />
       </div>
 
