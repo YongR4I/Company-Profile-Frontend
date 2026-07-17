@@ -15,7 +15,7 @@ export default function Headline({ text }: HeadlineProps) {
       <TextReveal
         variant="blur-in"
         as="h2"
-        delay={1500}
+        delay={500}
         direction="right"
         length={40}
         className="text-3xl sm:text-4xl md:text-display-sub w-full max-w-[600px] font-medium text-white"

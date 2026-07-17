@@ -1,6 +1,6 @@
 import CommonLayout from "@/components/layout/CommonLayout";
-import Image from "next/image";
 import { ServiceItem } from "@/types/services";
+import ServiceRow from "./ServiceRow";
 
 const defaultServices = [
   {
@@ -58,53 +58,14 @@ export default function ServicesGrid({ items }: ServicesGridProps) {
       ) : (
         <div className="w-full flex flex-col gap-8 md:gap-20">
           {displayServices.map((service, index) => (
-            <div key={index} className="flex flex-col bg-transparent">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-8">
-                {/* Title & Icon (Icon is mobile only) */}
-                <div className="flex flex-row md:flex-col items-center md:items-start justify-between md:justify-start w-full md:w-[220px] flex-shrink-0 gap-4">
-                  <h3 className="text-xl md:text-heading-h4 text-white font-medium md:whitespace-nowrap">
-                    {service.title}
-                  </h3>
-                  <div className="block md:hidden flex-shrink-0">
-                    <Image
-                      src={service.iconUrl || "/icons/services/Vector.svg"}
-                      alt={service.title}
-                      width={48}
-                      height={48}
-                      className="object-contain"
-                    />
-                  </div>
-                </div>
-
-                {/* Description - Center */}
-                <div className="flex-1 flex md:justify-center">
-                  <p
-                    className="text-white/80 max-w-[420px] w-full"
-                    style={{
-                      fontFamily: "var(--font-inter)",
-                      fontSize: "clamp(14px, 1.5vw, 16px)",
-                      lineHeight: 1.7,
-                    }}
-                  >
-                    {service.description}
-                  </p>
-                </div>
-
-                {/* Icon (Desktop only) */}
-                <div className="hidden md:flex w-[80px] flex-shrink-0 justify-end">
-                  <Image
-                    src={service.iconUrl || "/icons/services/Vector.svg"}
-                    alt={service.title}
-                    width={64}
-                    height={64}
-                    className="object-contain"
-                  />
-                </div>
-              </div>
-              {index < displayServices.length - 1 && (
-                <div className="w-full h-px bg-white/20 mt-8 md:mt-20" />
-              )}
-            </div>
+            <ServiceRow
+              key={index}
+              title={service.title}
+              description={service.description}
+              iconUrl={service.iconUrl || "/icons/services/Vector.svg"}
+              isLast={index === displayServices.length - 1}
+              delay={index * 100}
+            />
           ))}
         </div>
       )}

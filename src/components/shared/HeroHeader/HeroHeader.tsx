@@ -1,6 +1,7 @@
 import React from "react";
 import CommonLayout from "@/components/layout/CommonLayout";
 import TextReveal from "@/components/ui/TextReveal";
+import ScrollReveal from "@/components/ui/ScrollReveal";
 
 export interface HeroHeaderProps {
   title: React.ReactNode;
@@ -23,12 +24,17 @@ export default function HeroHeader({
       >
         <div className="absolute bottom-0 left-0 w-full h-[171px] pointer-events-none bg-gradient-to-b from-transparent to-[#040A0C] to-80%" />
         <div className="w-full relative z-10">
-          <h1
+          <TextReveal
+            variant="blur-in"
+            as="h1"
+            delay={300}
+            direction="bottom"
+            length={40}
             className="text-white font-medium text-[clamp(28px,7.5vw,80px)] tracking-tight leading-[1.1] sm:leading-[1.1]"
             style={{ fontFamily: "var(--font-inter)" }}
           >
             {title}
-          </h1>
+          </TextReveal>
         </div>
       </section>
     );
@@ -43,12 +49,14 @@ export default function HeroHeader({
         <div className="absolute inset-0 bg-water-900/60 mix-blend-multiply" />
         <div className="absolute bottom-0 left-0 w-full h-[300px] pointer-events-none bg-gradient-to-b from-transparent to-[#040A0C] to-90%" />
         <div className="w-full relative z-10 text-left flex flex-col justify-end h-full">
-          <h1
-            className="text-white font-bold text-[clamp(60px,10vw,120px)] tracking-tighter leading-[0.9]"
-            style={{ fontFamily: "var(--font-inter)" }}
-          >
-            {title}
-          </h1>
+          <ScrollReveal delay={200} duration={700} direction="up">
+            <h1
+              className="text-white font-bold text-[clamp(60px,10vw,120px)] tracking-tighter leading-[0.9]"
+              style={{ fontFamily: "var(--font-inter)" }}
+            >
+              {title}
+            </h1>
+          </ScrollReveal>
         </div>
       </CommonLayout>
     );
@@ -77,15 +85,17 @@ export default function HeroHeader({
             {subtitle}
           </TextReveal>
         )}
-        <h1
-          className="text-white font-medium italic tracking-tight leading-[1.1]"
-          style={{
-            fontFamily: "var(--font-inter)",
-            fontSize: "clamp(32px, 5vw, 72px)",
-          }}
-        >
-          {title}
-        </h1>
+        <ScrollReveal delay={400} duration={600} direction="up">
+          <h1
+            className="text-white font-medium italic tracking-tight leading-[1.1]"
+            style={{
+              fontFamily: "var(--font-inter)",
+              fontSize: "clamp(32px, 5vw, 72px)",
+            }}
+          >
+            {title}
+          </h1>
+        </ScrollReveal>
       </div>
     </CommonLayout>
   );

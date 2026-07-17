@@ -1,5 +1,6 @@
 import CommonLayout from "@/components/layout/CommonLayout";
 import TextReveal from "@/components/ui/TextReveal";
+import ScrollReveal from "@/components/ui/ScrollReveal";
 import React from "react";
 
 interface AboutHeadlineProps {
@@ -13,15 +14,17 @@ export default function AboutHeadline({ headline, description }: AboutHeadlinePr
       <TextReveal
       variant="blur-in"
       as="h2"
-      delay={1500}
+      delay={500}
       direction="right"
       length={40}
       className="text-3xl sm:text-4xl md:text-display-sub w-full max-w-[640px] font-medium text-white">
         {headline || "Technology That Grows With Your Business"}
       </TextReveal>
-      <p className="text-body-large md:text-heading-h4 w-full max-w-[480px] text-gray-400">
-        {description || "We create custom software, web platforms, and mobile applications that simplify workflows, improve business impact."}
-      </p>
+      <ScrollReveal delay={300} duration={600} direction="right">
+        <p className="text-body-large md:text-heading-h4 w-full max-w-[480px] text-gray-400">
+          {description || "We create custom software, web platforms, and mobile applications that simplify workflows, improve business impact."}
+        </p>
+      </ScrollReveal>
     </CommonLayout>
   );
 }

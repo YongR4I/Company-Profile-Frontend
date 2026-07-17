@@ -12,6 +12,7 @@ import {
 import { FaWhatsapp, FaTiktok } from "react-icons/fa";
 import { IoIosMail } from "react-icons/io";
 import { getSiteSettings } from "@/lib/strapi-services";
+import SocialIconsRow from "./SocialIconsRow";
 
 // Static fallback social links
 const defaultSocialLinks = [
@@ -64,13 +65,13 @@ export default async function HeroFooter() {
           {heroFooterText}
         </p>
       </div>
-      <div className="social-container w-full md:w-auto flex flex-row justify-start md:justify-end items-center gap-4">
+      <SocialIconsRow>
         {socialLinks.map(({ icon: Icon, href, label, copyValue }) => (
           <SocialButton key={label} href={href} aria-label={label} copyValue={copyValue}>
             <Icon size={30} />
           </SocialButton>
         ))}
-      </div>
+      </SocialIconsRow>
     </CommonLayout>
   );
 }

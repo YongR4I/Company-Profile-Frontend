@@ -1,6 +1,7 @@
 "use client";
 
 import CommonLayout from "@/components/layout/CommonLayout";
+import ScrollReveal from "@/components/ui/ScrollReveal";
 import React, { useActionState } from "react";
 import { submitContactForm, ContactFormState } from "@/app/contact/actions";
 
@@ -38,31 +39,35 @@ export default function ContactForm() {
       <div className="max-w-[1596px] w-full mx-auto flex flex-col md:flex-row gap-10 md:gap-16">
         {/* Left Side */}
         <div className="md:w-[40%] flex flex-col gap-8">
-          <h1
-            className="text-white font-semibold tracking-tight leading-[1.05]"
-            style={{
-              fontFamily: "var(--font-inter)",
-              fontSize: "clamp(32px, 5vw, 56px)",
-            }}
-          >
-            Let&apos;s Build <span className="italic">Together</span>
-          </h1>
+          <ScrollReveal delay={0} duration={500} direction="up">
+            <h1
+              className="text-white font-semibold tracking-tight leading-[1.05]"
+              style={{
+                fontFamily: "var(--font-inter)",
+                fontSize: "clamp(32px, 5vw, 56px)",
+              }}
+            >
+              Let&apos;s Build <span className="italic">Together</span>
+            </h1>
+          </ScrollReveal>
 
           <div className="flex flex-col gap-5">
-            {benefits.map((item) => (
-              <div key={item} className="flex items-center gap-3">
-                <ArrowIcon className="flex-shrink-0" />
-                <span
-                  className="text-white font-medium"
-                  style={{
-                    fontFamily: "var(--font-inter)",
-                    fontSize: "clamp(18px, 2vw, 24px)",
-                    lineHeight: 1.3,
-                  }}
-                >
-                  {item}
-                </span>
-              </div>
+            {benefits.map((item, index) => (
+              <ScrollReveal key={item} delay={150 + index * 100} duration={400} direction="left">
+                <div className="flex items-center gap-3">
+                  <ArrowIcon className="flex-shrink-0" />
+                  <span
+                    className="text-white font-medium"
+                    style={{
+                      fontFamily: "var(--font-inter)",
+                      fontSize: "clamp(18px, 2vw, 24px)",
+                      lineHeight: 1.3,
+                    }}
+                  >
+                    {item}
+                  </span>
+                </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>

@@ -54,7 +54,7 @@ export default function AboutPreview({ items }: AboutPreviewProps) {
     >
       <div className="max-w-[1598px] w-full grid grid-cols-1 md:grid-cols-3 gap-[30px] px-4 md:px-0">
         {displaySolutions.map((solution, index) => (
-          <SolutionCard key={index} solution={solution} />
+          <SolutionCard key={index} solution={solution} index={index} />
         ))}
       </div>
     </CommonLayout>

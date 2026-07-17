@@ -68,11 +68,14 @@ export default function Navbar({ settings }: NavbarProps) {
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 w-full z-[100] flex items-center justify-between px-6 md:px-8 py-5 transition-all duration-300 ${
-        isScrolled
-          ? "bg-water-900/80 backdrop-blur-md border-b border-water-300/10"
-          : "bg-transparent border-b border-transparent"
-      }`}>
+      <nav
+        className={`fixed top-0 left-0 w-full z-[100] flex items-center justify-between px-6 md:px-8 py-5 transition-all duration-300 max-h-[100px] ${
+          isScrolled
+            ? "bg-water-900/80 backdrop-blur-md border-b border-water-300/10"
+            : "bg-transparent border-b border-transparent"
+        }`}
+        style={{ transform: "translateZ(0)", willChange: "transform" }}
+      >
         <div className="flex-shrink-0 flex items-center">
           <Link href="/" onClick={() => setIsOpen(false)}>
             <Image

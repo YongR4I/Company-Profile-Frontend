@@ -2,6 +2,7 @@ import CommonLayout from "@/components/layout/CommonLayout";
 import React from "react";
 import { ProcessStep as ProcessStepType } from "@/types/strapi";
 import { toProcessStep } from "@/lib/mappers";
+import ProcessStepCard from "./ProcessStepCard";
 
 const defaultProcessSteps = [
   {
@@ -89,46 +90,12 @@ export default function Process({ label, steps }: ProcessProps) {
             <circle cx="99.5" cy="47" r="0.6" fill="white" />
           </svg>
 
-          {displaySteps.map((step) => (
-            <div
+          {displaySteps.map((step, index) => (
+            <ProcessStepCard
               key={step.number}
-              className={`group relative bg-water-900 border border-water-300/30 hover:border-water-300/60 p-8 md:p-10 flex flex-col w-full md:flex-1 shrink-0 ${step.marginTop} ${step.minHeight}`}
-            >
-              <div className="relative z-10 flex flex-col gap-4 md:gap-6">
-                <h3
-                  className="text-white font-medium"
-                  style={{
-                    fontFamily: "var(--font-inter)",
-                    fontSize: "clamp(28px, 3.5vw, 64px)",
-                    lineHeight: 1.1,
-                    letterSpacing: "-0.02em",
-                  }}
-                >
-                  {step.title}
-                </h3>
-                <p
-                  className="text-[#d0d0d0]"
-                  style={{
-                    fontFamily: "var(--font-inter)",
-                    fontSize: "clamp(16px, 1.8vw, 28px)",
-                    lineHeight: 1.4,
-                    fontWeight: 400,
-                  }}
-                >
-                  {step.description}
-                </p>
-              </div>
-
-              <span
-                className="absolute bottom-4 md:bottom-6 right-4 md:right-6 text-transparent bg-clip-text bg-linear-to-b from-white to-transparent font-semibold leading-none pointer-events-none select-none"
-                style={{
-                  fontFamily: "var(--font-inter)",
-                  fontSize: "clamp(80px, 8vw, 140px)",
-                }}
-              >
-                {step.number}
-              </span>
-            </div>
+              {...step}
+              delay={index * 150}
+            />
           ))}
         </div>
       </div>

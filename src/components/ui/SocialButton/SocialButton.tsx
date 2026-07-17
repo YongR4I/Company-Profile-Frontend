@@ -35,8 +35,7 @@ export default function SocialButton({
         }}
       >
         <div
-          className="w-fit h-auto aspect-square p-2 rounded-full transition-colors duration-200 border border-white
-            hover:bg-white hover:text-water-900"
+          className="w-fit h-auto aspect-square p-2 rounded-full border border-white transition-[background-color,color,transform] duration-200 ease-out hover:bg-white hover:text-water-900 hover:scale-110 active:scale-95"
         >
           {children}
         </div>

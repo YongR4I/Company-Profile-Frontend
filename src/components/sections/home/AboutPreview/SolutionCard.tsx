@@ -1,5 +1,6 @@
 import Image from "next/image";
 import React from "react";
+import ScrollReveal from "@/components/ui/ScrollReveal";
 
 interface SolutionCardProps {
   solution: {
@@ -9,13 +10,15 @@ interface SolutionCardProps {
     marginTop: string;
     icon: string;
   };
+  index?: number;
 }
 
-export default function SolutionCard({ solution }: SolutionCardProps) {
+export default function SolutionCard({ solution, index = 0 }: SolutionCardProps) {
   return (
-    <div
-      className={`group w-full max-w-[512px] h-[450px] sm:h-[480px] md:h-[594px] bg-water-900 border border-water-300/20 hover:border-water-300/40 rounded-[20px] pb-[30px] px-[25px] flex flex-col relative overflow-hidden mx-auto ${solution.marginTop} ${solution.paddingTop}`}
-    >
+    <ScrollReveal delay={index * 150} duration={600} direction="up">
+      <div
+        className={`group w-full max-w-[512px] h-[450px] sm:h-[480px] md:h-[594px] bg-water-900 border border-water-300/20 rounded-[20px] pb-[30px] px-[25px] flex flex-col relative overflow-hidden mx-auto transition-[border-color,transform] duration-300 ease-out hover:border-water-300/40 hover:scale-[1.01] ${solution.marginTop} ${solution.paddingTop}`}
+      >
       {/* The Text Content */}
       <div className="relative z-10 flex flex-col gap-[10px]">
         <h3 className="text-2xl md:text-heading-h3 text-white font-semibold">
@@ -45,6 +48,7 @@ export default function SolutionCard({ solution }: SolutionCardProps) {
                 group-hover:translate-y-1/5 transition-transform duration-300"
         />
       </div>
-    </div>
+      </div>
+    </ScrollReveal>
   );
 }

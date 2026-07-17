@@ -137,3 +137,14 @@ body {
   background: var(--background);
   color: var(--foreground);
 }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-\[float_6s_ease-in-out_infinite\] {
+    animation: none !important;
+  }
+}

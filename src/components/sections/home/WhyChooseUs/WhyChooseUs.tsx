@@ -3,6 +3,7 @@ import Image from "next/image";
 import React from "react";
 import { WhyChooseItem } from "@/types/strapi";
 import { toWhyCard } from "@/lib/mappers";
+import WhyCard from "./WhyCard";
 
 const defaultWhyCards = [
   {
@@ -31,36 +32,6 @@ const defaultWhyCards = [
   },
 ];
 
-function WhyCard({
-  number,
-  title,
-  description,
-  className,
-}: {
-  number: string;
-  title: string;
-  description: string;
-  className?: string;
-}) {
-  return (
-    <div
-      className={`relative w-full max-w-[430px] rounded-[20px] border border-[rgba(86,195,240,0.5)] bg-[radial-gradient(81.27%_109.27%_at_52.87%_100%,_rgba(145,216,245,0.9)_0%,_rgba(73,166,204,0.9)_41.09%,_rgba(73,166,204,0)_100%)] p-[25px] px-[20px] flex flex-col gap-[10px] ${className}`}
-    >
-      <div className="flex items-start justify-between">
-        <h3 className="text-heading-h4 text-white font-semibold max-w-3/5">
-          {title}
-        </h3>
-        <span className="text-display-hero text-transparent bg-clip-text bg-linear-to-t from-transparent to-white font-bold leading-none">
-          {number}
-        </span>
-      </div>
-      <p className="text-heading-h5 font-normal leading-tight tracking-tight text-ice-200 max-w-4/5">
-        {description}
-      </p>
-    </div>
-  );
-}
-
 interface WhyChooseUsProps {
   items?: WhyChooseItem[];
 }
@@ -83,7 +54,7 @@ export default function WhyChooseUs({ items }: WhyChooseUsProps) {
             alt="Robot mascot"
             width={450}
             height={450}
-            className="w-auto h-auto object-contain"
+            className="w-auto h-auto object-contain animate-[float_6s_ease-in-out_infinite] translate-y-4"
           />
         </div>
 
@@ -91,20 +62,20 @@ export default function WhyChooseUs({ items }: WhyChooseUsProps) {
         <div className="hidden lg:flex flex-row items-center justify-between gap-[180px]">
           {/* Left Section */}
           <div className="flex flex-col gap-40">
-            {displayCards[1] && <WhyCard {...displayCards[1]} className="translate-x-[10vw]" />}
-            {displayCards[0] && <WhyCard {...displayCards[0]} />}
+            {displayCards[1] && <WhyCard {...displayCards[1]} className="translate-x-[10vw]" delay={100} />}
+            {displayCards[0] && <WhyCard {...displayCards[0]} delay={250} />}
           </div>
           {/* Right Section */}
           <div className="flex flex-col gap-40">
-            {displayCards[2] && <WhyCard {...displayCards[2]} className="translate-x-[-10vw]" />}
-            {displayCards[3] && <WhyCard {...displayCards[3]} />}
+            {displayCards[2] && <WhyCard {...displayCards[2]} className="translate-x-[-10vw]" delay={400} />}
+            {displayCards[3] && <WhyCard {...displayCards[3]} delay={550} />}
           </div>
         </div>
 
         {/* Mobile / Tablet: Single column centered */}
         <div className="flex lg:hidden flex-col gap-[30px] items-center w-full">
           {displayCards.map((card, index) => (
-            <WhyCard key={card.number || index} {...card} />
+            <WhyCard key={card.number || index} {...card} delay={index * 150} />
           ))}
         </div>
 
