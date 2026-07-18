@@ -33,9 +33,6 @@ export async function fetchApi<T>(path: string, options: FetchApiOptions = {}): 
   let url = `${API_URL}${path}`;
   if (params && Object.keys(params).length > 0) {
     url += `?${buildQueryString(params)}`;
-  } else if (!path.includes('?')) {
-    // Default populate deep for Strapi if no params passed
-    url += '?populate=*';
   }
 
   const headers: HeadersInit = {

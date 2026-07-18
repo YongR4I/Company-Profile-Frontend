@@ -2,12 +2,16 @@ import { notFound } from "next/navigation";
 import { getBlogPosts, getBlogPostBySlug } from "@/lib/strapi-services";
 import { toBlogPost } from "@/lib/mappers";
 import BlogDetail from "@/components/sections/blog/BlogDetail";
+import { routing } from "@/i18n/routing";
 
 export async function generateStaticParams() {
-  const posts = await getBlogPosts();
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
+  const results = await Promise.all(
+    routing.locales.map(async (locale) => {
+      const posts = await getBlogPosts(locale);
+      return posts.map((post) => ({ locale, slug: post.slug }));
+    })
+  );
+  return results.flat();
 }
 
 export default async function BlogPostPage({

@@ -21,7 +21,7 @@ import {
 const DEFAULT_POPULATE = 'populate=*';
 
 function withLocale(path: string, locale?: string): string {
-  if (!locale || locale === 'en') return path;
+  if (!locale) return path;
   const separator = path.includes('?') ? '&' : '?';
   return `${path}${separator}locale=${locale}`;
 }
@@ -223,7 +223,7 @@ export async function getBlogPostBySlug(slug: string, locale?: string): Promise<
 
 export async function getCategories(locale?: string): Promise<Category[]> {
   try {
-    const path = withLocale('/categories', locale);
+    const path = withLocale(`/categories?${DEFAULT_POPULATE}`, locale);
     const res = await fetchApi<StrapiResponse<Category[]>>(path);
     return res.data;
   } catch (e) {
@@ -233,7 +233,7 @@ export async function getCategories(locale?: string): Promise<Category[]> {
 
 export async function getTags(locale?: string): Promise<Tag[]> {
   try {
-    const path = withLocale('/tags', locale);
+    const path = withLocale(`/tags?${DEFAULT_POPULATE}`, locale);
     const res = await fetchApi<StrapiResponse<Tag[]>>(path);
     return res.data;
   } catch (e) {
