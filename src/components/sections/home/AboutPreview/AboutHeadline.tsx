@@ -6,9 +6,11 @@ import React from "react";
 interface AboutHeadlineProps {
   headline?: string;
   description?: string;
+  defaultHeadline?: string;
+  defaultDescription?: string;
 }
 
-export default function AboutHeadline({ headline, description }: AboutHeadlineProps) {
+export default function AboutHeadline({ headline, description, defaultHeadline, defaultDescription }: AboutHeadlineProps) {
   return (
     <CommonLayout id="about-headline" className="h-fit! flex flex-col md:flex-row items-start md:items-center justify-between mt-16 mb-8 md:mt-50 md:mb-30 py-5 gap-6 md:gap-12">
       <TextReveal
@@ -18,11 +20,11 @@ export default function AboutHeadline({ headline, description }: AboutHeadlinePr
       direction="right"
       length={40}
       className="text-3xl sm:text-4xl md:text-display-sub w-full max-w-[640px] font-medium text-white">
-        {headline || "Technology That Grows With Your Business"}
+        {headline || defaultHeadline || "Technology That Grows With Your Business"}
       </TextReveal>
       <ScrollReveal delay={300} duration={600} direction="right">
         <p className="text-body-large md:text-heading-h4 w-full max-w-[480px] text-gray-400">
-          {description || "We create custom software, web platforms, and mobile applications that simplify workflows, improve business impact."}
+          {description || defaultDescription || "We create custom software, web platforms, and mobile applications that simplify workflows, improve business impact."}
         </p>
       </ScrollReveal>
     </CommonLayout>

@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import CommonLayout from "@/components/layout/CommonLayout";
 import Image from "next/image";
 import React from "react";
@@ -5,38 +6,37 @@ import { WhyChooseItem } from "@/types/strapi";
 import { toWhyCard } from "@/lib/mappers";
 import WhyCard from "./WhyCard";
 
-const defaultWhyCards = [
-  {
-    number: "1",
-    title: "Start with a Free Consultation",
-    description:
-      "Share your ideas with our team and discover the right digital solution for your business.",
-  },
-  {
-    number: "2",
-    title: "Let's Solve It Together",
-    description:
-      "Tell us your challenges, and we'll help you find the best technology solution.",
-  },
-  {
-    number: "3",
-    title: "Your Project, Protected",
-    description:
-      "Build with confidence knowing your ideas and project remain strictly confidential.",
-  },
-  {
-    number: "4",
-    title: "Get a Fast Response",
-    description:
-      "Reach out anytime and receive quick replies, clear communication, and timely updates.",
-  },
-];
-
 interface WhyChooseUsProps {
   items?: WhyChooseItem[];
+  locale?: string;
 }
 
-export default function WhyChooseUs({ items }: WhyChooseUsProps) {
+export default async function WhyChooseUs({ items, locale }: WhyChooseUsProps) {
+  const t = await getTranslations({ locale: locale || "en", namespace: "home" });
+
+  const defaultWhyCards = [
+    {
+      number: "1",
+      title: t("why1Title"),
+      description: t("why1Desc"),
+    },
+    {
+      number: "2",
+      title: t("why2Title"),
+      description: t("why2Desc"),
+    },
+    {
+      number: "3",
+      title: t("why3Title"),
+      description: t("why3Desc"),
+    },
+    {
+      number: "4",
+      title: t("why4Title"),
+      description: t("why4Desc"),
+    },
+  ];
+
   const displayCards = items && items.length > 0
     ? items.map(toWhyCard)
     : defaultWhyCards;
@@ -47,7 +47,6 @@ export default function WhyChooseUs({ items }: WhyChooseUsProps) {
       className="h-fit! w-full justify-center overflow-hidden py-10 md:py-20"
     >
       <div className="relative w-full z-1">
-        {/* Robot image - hidden on mobile, z-1: behind black fade (z-3), in front of blue circle (z-0) */}
         <div className="hidden lg:flex absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-[20%] z-1 w-[450px] h-[450px] pointer-events-none justify-center">
           <Image
             src="/images/branding/robot.png"
@@ -58,21 +57,17 @@ export default function WhyChooseUs({ items }: WhyChooseUsProps) {
           />
         </div>
 
-        {/* Desktop: Left and Right sections */}
         <div className="hidden lg:flex flex-row items-center justify-between gap-[180px]">
-          {/* Left Section */}
           <div className="flex flex-col gap-40">
             {displayCards[1] && <WhyCard {...displayCards[1]} className="translate-x-[10vw]" delay={100} />}
             {displayCards[0] && <WhyCard {...displayCards[0]} delay={250} />}
           </div>
-          {/* Right Section */}
           <div className="flex flex-col gap-40">
             {displayCards[2] && <WhyCard {...displayCards[2]} className="translate-x-[-10vw]" delay={400} />}
             {displayCards[3] && <WhyCard {...displayCards[3]} delay={550} />}
           </div>
         </div>
 
-        {/* Mobile / Tablet: Single column centered */}
         <div className="flex lg:hidden flex-col gap-[30px] items-center w-full">
           {displayCards.map((card, index) => (
             <WhyCard key={card.number || index} {...card} delay={index * 150} />
@@ -81,7 +76,6 @@ export default function WhyChooseUs({ items }: WhyChooseUsProps) {
 
         <div className="hidden lg:block absolute left-0 w-full z-3 h-[90px] pointer-events-none bg-gradient-to-b from-transparent to-[#040A0C] to-80%" />
 
-        {/* Grid background */}
         <div
           className="absolute inset-0 z-0 pointer-events-none opacity-30"
           style={{
@@ -91,7 +85,6 @@ export default function WhyChooseUs({ items }: WhyChooseUsProps) {
           }}
         />
 
-        {/* Circle light gradient */}
         <div
           className="hidden lg:block absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-[100rem] h-[100rem] z-0 pointer-events-none"
           style={{

@@ -1,46 +1,50 @@
+import { getTranslations } from "next-intl/server";
 import CommonLayout from "@/components/layout/CommonLayout";
 import React from "react";
 import { ProcessStep as ProcessStepType } from "@/types/strapi";
 import { toProcessStep } from "@/lib/mappers";
 import ProcessStepCard from "./ProcessStepCard";
 
-const defaultProcessSteps = [
-  {
-    number: "1",
-    title: "Share Your Vision",
-    description: "Tell us your goals, challenges, and project requirements.",
-    marginTop: "md:mt-0",
-    minHeight: "min-h-[300px] md:min-h-[600px]",
-  },
-  {
-    number: "2",
-    title: "Plan & Build",
-    description: "We define the solution and begin development together.",
-    marginTop: "md:mt-[40px]",
-    minHeight: "min-h-[300px] md:min-h-[640px]",
-  },
-  {
-    number: "3",
-    title: "Review & Refine",
-    description: "Test, improve, and perfect every detail before launch.",
-    marginTop: "md:mt-[80px]",
-    minHeight: "min-h-[300px] md:min-h-[680px]",
-  },
-  {
-    number: "4",
-    title: "Launch & Grow",
-    description: "Go live with ongoing support for future growth.",
-    marginTop: "md:mt-[120px]",
-    minHeight: "min-h-[300px] md:min-h-[720px]",
-  },
-];
-
 interface ProcessProps {
   label?: string;
   steps?: ProcessStepType[];
+  locale?: string;
 }
 
-export default function Process({ label, steps }: ProcessProps) {
+export default async function Process({ label, steps, locale }: ProcessProps) {
+  const t = await getTranslations({ locale: locale || "en", namespace: "about" });
+
+  const defaultProcessSteps = [
+    {
+      number: "1",
+      title: t("step1Title"),
+      description: t("step1Desc"),
+      marginTop: "md:mt-0",
+      minHeight: "min-h-[300px] md:min-h-[600px]",
+    },
+    {
+      number: "2",
+      title: t("step2Title"),
+      description: t("step2Desc"),
+      marginTop: "md:mt-[40px]",
+      minHeight: "min-h-[300px] md:min-h-[640px]",
+    },
+    {
+      number: "3",
+      title: t("step3Title"),
+      description: t("step3Desc"),
+      marginTop: "md:mt-[80px]",
+      minHeight: "min-h-[300px] md:min-h-[680px]",
+    },
+    {
+      number: "4",
+      title: t("step4Title"),
+      description: t("step4Desc"),
+      marginTop: "md:mt-[120px]",
+      minHeight: "min-h-[300px] md:min-h-[720px]",
+    },
+  ];
+
   const displaySteps = steps && steps.length > 0
     ? steps.map((step, index) => {
         const mapped = toProcessStep(step, index);
@@ -64,11 +68,10 @@ export default function Process({ label, steps }: ProcessProps) {
             lineHeight: 1.2,
           }}
         >
-          {label || "Our Process"}
+          {label || t("processLabel")}
         </span>
 
         <div className="relative flex flex-col md:flex-row md:items-start md:gap-0 overflow-x-auto no-scrollbar">
-          {/* Connecting line */}
           <svg
             className="absolute inset-0 w-full h-full pointer-events-none hidden md:block z-0 min-w-full"
             viewBox="0 0 100 100"

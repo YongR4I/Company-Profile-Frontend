@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import React from "react";
 import Image from "next/image";
 import CommonLayout from "@/components/layout/CommonLayout";
@@ -20,11 +21,16 @@ const defaultPartners = [
   { name: "Partner 8", logoUrl: "/images/shared/partners/partner-8.png", websiteUrl: undefined },
 ];
 
-export default async function Partners() {
-  const partnerPage = await getPartnerPage();
+interface PartnersProps {
+  locale?: string;
+}
 
-  const title = partnerPage?.title || "Partners in innovation";
-  const description = partnerPage?.description || "Our clients trust us to transform ideas into scalable digital solutions. Now it's your turn to build with confidence.";
+export default async function Partners({ locale }: PartnersProps) {
+  const t = await getTranslations({ locale: locale || "en", namespace: "common" });
+  const partnerPage = await getPartnerPage(locale);
+
+  const title = partnerPage?.title || t("partnersTitle");
+  const description = partnerPage?.description || t("partnersDesc");
 
   // Use Strapi partners if available, otherwise fall back to static
   const partners =

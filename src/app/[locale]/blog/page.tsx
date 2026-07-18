@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import HeroHeader from "@/components/shared/HeroHeader";
 import BlogGrid from "@/components/sections/blog/BlogGrid";
 import Partners from "@/components/shared/Partners";
@@ -5,10 +6,16 @@ import CTA from "@/components/shared/CTA";
 import { getBlogPosts, getBlogPage } from "@/lib/strapi-services";
 import { toBlogPost } from "@/lib/mappers";
 
-export default async function BlogPage() {
+export default async function BlogPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "blog" });
   const [posts, page] = await Promise.all([
-    getBlogPosts(),
-    getBlogPage(),
+    getBlogPosts(locale),
+    getBlogPage(locale),
   ]);
 
   return (
@@ -16,15 +23,15 @@ export default async function BlogPage() {
       <HeroHeader
         title={
           <>
-            Sabiru <span className="text-water-300">Blog</span>
+            {t("heroTitle")}
           </>
         }
-        subtitle={page?.heroSubtitle || "What's on our mind"}
+        subtitle={page?.heroSubtitle || t("heroSubtitle")}
         variant="subpage"
       />
       <BlogGrid posts={posts.map(toBlogPost)} />
-      <Partners />
-      <CTA />
+      <Partners locale={locale} />
+      <CTA locale={locale} />
     </div>
   );
 }

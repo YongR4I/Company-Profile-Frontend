@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 import { portfolioData } from "@/data/portfolio";
 import { PortfolioItem } from "@/types/portfolio";
 
@@ -13,6 +14,7 @@ interface ProjectGridProps {
 }
 
 export default function ProjectGrid({ projects }: ProjectGridProps) {
+  const t = useTranslations("portfolio");
   const [showAll, setShowAll] = useState(false);
   const sectionRef = React.useRef<HTMLElement>(null);
 
@@ -117,7 +119,7 @@ export default function ProjectGrid({ projects }: ProjectGridProps) {
                 onClick={() => setShowAll(true)}
                 className="group/btn flex items-center gap-3 text-white/70 hover:text-white transition-[color] duration-300 cursor-pointer active:scale-[0.96]"
               >
-                <span className="text-sm font-medium tracking-wider uppercase">See More</span>
+                <span className="text-sm font-medium tracking-wider uppercase">{t("seeMore")}</span>
                 <svg
                   width="20"
                   height="20"
@@ -155,7 +157,7 @@ export default function ProjectGrid({ projects }: ProjectGridProps) {
               >
                 <polyline points="18 15 12 9 6 15" />
               </svg>
-              <span className="text-sm font-medium tracking-wider uppercase">Show Less</span>
+              <span className="text-sm font-medium tracking-wider uppercase">{t("showLess")}</span>
             </button>
           </div>
         )}

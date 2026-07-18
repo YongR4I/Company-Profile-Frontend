@@ -1,16 +1,17 @@
 import type { NextConfig } from "next";
+import createNextIntlPlugin from "next-intl/plugin";
+
+const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
-      // Local Strapi development server
       {
         protocol: "http",
         hostname: "localhost",
         port: "1337",
         pathname: "/uploads/**",
       },
-      // Production Strapi server (update hostname when deploying)
       {
         protocol: "https",
         hostname: process.env.NEXT_PUBLIC_STRAPI_HOST || "localhost",
@@ -20,4 +21,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);

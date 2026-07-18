@@ -18,175 +18,233 @@ import {
   Tag
 } from '@/types/strapi';
 
-// Using populate=* for simplicity, but for Strapi 5 we often need ?populate=deep
-// Since we don't have the strapi-plugin-populate-deep installed yet by default,
-// we will specify the relations we need explicitly if deep is not available,
-// but let's assume we can use a complex populate parameter or just populate=*.
-// In Strapi 5 Document API, populate=* populates the first level of relations.
-// We'll use a hardcoded string `?populate=*` or deep population.
-
 const DEFAULT_POPULATE = 'populate=*';
 
-// --- Single Types ---
+function withLocale(path: string, locale?: string): string {
+  if (!locale || locale === 'en') return path;
+  const separator = path.includes('?') ? '&' : '?';
+  return `${path}${separator}locale=${locale}`;
+}
 
-export async function getSiteSettings(): Promise<SiteSettings | null> {
+export async function getSiteSettings(locale?: string): Promise<SiteSettings | null> {
   try {
-    const res = await fetchApi<StrapiResponse<SiteSettings>>(`/site-setting?populate[0]=navLinks&populate[1]=socialLinks&populate[2]=footerCompanyLinks&populate[3]=footerServiceLinks&populate[4]=logo`);
+    const path = withLocale(
+      `/site-setting?populate[0]=navLinks&populate[1]=socialLinks&populate[2]=footerCompanyLinks&populate[3]=footerServiceLinks&populate[4]=logo`,
+      locale
+    );
+    const res = await fetchApi<StrapiResponse<SiteSettings>>(path);
     return res.data;
   } catch (e) {
     return null;
   }
 }
 
-export async function getHomepage(): Promise<Homepage | null> {
+export async function getHomepage(locale?: string): Promise<Homepage | null> {
   try {
-    const res = await fetchApi<StrapiResponse<Homepage>>(`/homepage?populate[pageBlocks][populate]=*`);
+    const path = withLocale(
+      `/homepage?populate[pageBlocks][populate]=*`,
+      locale
+    );
+    const res = await fetchApi<StrapiResponse<Homepage>>(path);
     return res.data;
   } catch (e) {
     return null;
   }
 }
 
-export async function getAboutPage(): Promise<AboutPage | null> {
+export async function getAboutPage(locale?: string): Promise<AboutPage | null> {
   try {
-    const res = await fetchApi<StrapiResponse<AboutPage>>(`/about-page?populate[0]=processSteps`);
+    const path = withLocale(
+      `/about-page?populate[0]=processSteps`,
+      locale
+    );
+    const res = await fetchApi<StrapiResponse<AboutPage>>(path);
     return res.data;
   } catch (e) {
     return null;
   }
 }
 
-export async function getServicesPage(): Promise<ServicesPage | null> {
+export async function getServicesPage(locale?: string): Promise<ServicesPage | null> {
   try {
-    const res = await fetchApi<StrapiResponse<ServicesPage>>(`/services-page?${DEFAULT_POPULATE}`);
+    const path = withLocale(
+      `/services-page?${DEFAULT_POPULATE}`,
+      locale
+    );
+    const res = await fetchApi<StrapiResponse<ServicesPage>>(path);
     return res.data;
   } catch (e) {
     return null;
   }
 }
 
-export async function getPortfolioPage(): Promise<PortfolioPage | null> {
+export async function getPortfolioPage(locale?: string): Promise<PortfolioPage | null> {
   try {
-    const res = await fetchApi<StrapiResponse<PortfolioPage>>(`/portfolio-page?${DEFAULT_POPULATE}`);
+    const path = withLocale(
+      `/portfolio-page?${DEFAULT_POPULATE}`,
+      locale
+    );
+    const res = await fetchApi<StrapiResponse<PortfolioPage>>(path);
     return res.data;
   } catch (e) {
     return null;
   }
 }
 
-export async function getBlogPage(): Promise<BlogPage | null> {
+export async function getBlogPage(locale?: string): Promise<BlogPage | null> {
   try {
-    const res = await fetchApi<StrapiResponse<BlogPage>>(`/blog-page?${DEFAULT_POPULATE}`);
+    const path = withLocale(
+      `/blog-page?${DEFAULT_POPULATE}`,
+      locale
+    );
+    const res = await fetchApi<StrapiResponse<BlogPage>>(path);
     return res.data;
   } catch (e) {
     return null;
   }
 }
 
-export async function getContactPage(): Promise<ContactPage | null> {
+export async function getContactPage(locale?: string): Promise<ContactPage | null> {
   try {
-    const res = await fetchApi<StrapiResponse<ContactPage>>(`/contact-page?${DEFAULT_POPULATE}`);
+    const path = withLocale(
+      `/contact-page?${DEFAULT_POPULATE}`,
+      locale
+    );
+    const res = await fetchApi<StrapiResponse<ContactPage>>(path);
     return res.data;
   } catch (e) {
     return null;
   }
 }
 
-export async function getPartnerPage(): Promise<PartnerPage | null> {
+export async function getPartnerPage(locale?: string): Promise<PartnerPage | null> {
   try {
-    const res = await fetchApi<StrapiResponse<PartnerPage>>(`/partner?populate[0]=partnerList.logo`);
+    const path = withLocale(
+      `/partner?populate[0]=partnerList.logo`,
+      locale
+    );
+    const res = await fetchApi<StrapiResponse<PartnerPage>>(path);
     return res.data;
   } catch (e) {
     return null;
   }
 }
 
-export async function getCta(): Promise<Cta | null> {
+export async function getCta(locale?: string): Promise<Cta | null> {
   try {
-    const res = await fetchApi<StrapiResponse<Cta>>(`/cta?${DEFAULT_POPULATE}`);
+    const path = withLocale(
+      `/cta?${DEFAULT_POPULATE}`,
+      locale
+    );
+    const res = await fetchApi<StrapiResponse<Cta>>(path);
     return res.data;
   } catch (e) {
     return null;
   }
 }
 
-// --- Collection Types ---
-
-export async function getServices(): Promise<Service[]> {
+export async function getServices(locale?: string): Promise<Service[]> {
   try {
-    const res = await fetchApi<StrapiResponse<Service[]>>(`/services?populate[0]=features&populate[1]=icon`);
+    const path = withLocale(
+      `/services?populate[0]=features&populate[1]=icon`,
+      locale
+    );
+    const res = await fetchApi<StrapiResponse<Service[]>>(path);
     return res.data;
   } catch (e) {
     return [];
   }
 }
 
-export async function getServiceBySlug(slug: string): Promise<Service | null> {
+export async function getServiceBySlug(slug: string, locale?: string): Promise<Service | null> {
   try {
-    const res = await fetchApi<StrapiResponse<Service[]>>(`/services?filters[slug][$eq]=${slug}&populate[0]=features&populate[1]=icon`);
+    const path = withLocale(
+      `/services?filters[slug][$eq]=${slug}&populate[0]=features&populate[1]=icon`,
+      locale
+    );
+    const res = await fetchApi<StrapiResponse<Service[]>>(path);
     return res.data[0] || null;
   } catch (e) {
     return null;
   }
 }
 
-export async function getPortfolios(): Promise<Portfolio[]> {
+export async function getPortfolios(locale?: string): Promise<Portfolio[]> {
   try {
-    const res = await fetchApi<StrapiResponse<Portfolio[]>>(`/portfolios?populate[0]=category&populate[1]=technologies&populate[2]=image`);
+    const path = withLocale(
+      `/portfolios?populate[0]=category&populate[1]=technologies&populate[2]=image`,
+      locale
+    );
+    const res = await fetchApi<StrapiResponse<Portfolio[]>>(path);
     return res.data;
   } catch (e) {
     return [];
   }
 }
 
-export async function getPortfolioBySlug(slug: string): Promise<Portfolio | null> {
+export async function getPortfolioBySlug(slug: string, locale?: string): Promise<Portfolio | null> {
   try {
-    const res = await fetchApi<StrapiResponse<Portfolio[]>>(`/portfolios?filters[slug][$eq]=${slug}&populate[0]=category&populate[1]=technologies&populate[2]=image`);
+    const path = withLocale(
+      `/portfolios?filters[slug][$eq]=${slug}&populate[0]=category&populate[1]=technologies&populate[2]=image`,
+      locale
+    );
+    const res = await fetchApi<StrapiResponse<Portfolio[]>>(path);
     return res.data[0] || null;
   } catch (e) {
     return null;
   }
 }
 
-export async function getBlogPosts(): Promise<BlogPost[]> {
+export async function getBlogPosts(locale?: string): Promise<BlogPost[]> {
   try {
-    const res = await fetchApi<StrapiResponse<BlogPost[]>>(`/blog-posts?populate=*&sort=date:desc`);
+    const path = withLocale(
+      `/blog-posts?populate=*&sort=date:desc`,
+      locale
+    );
+    const res = await fetchApi<StrapiResponse<BlogPost[]>>(path);
     return res.data;
   } catch (e) {
     return [];
   }
 }
 
-export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> {
+export async function getBlogPostBySlug(slug: string, locale?: string): Promise<BlogPost | null> {
   try {
-    const res = await fetchApi<StrapiResponse<BlogPost[]>>(`/blog-posts?filters[slug][$eq]=${slug}&populate=*`);
+    const path = withLocale(
+      `/blog-posts?filters[slug][$eq]=${slug}&populate=*`,
+      locale
+    );
+    const res = await fetchApi<StrapiResponse<BlogPost[]>>(path);
     return res.data[0] || null;
   } catch (e) {
     return null;
   }
 }
 
-export async function getCategories(): Promise<Category[]> {
+export async function getCategories(locale?: string): Promise<Category[]> {
   try {
-    const res = await fetchApi<StrapiResponse<Category[]>>('/categories');
+    const path = withLocale('/categories', locale);
+    const res = await fetchApi<StrapiResponse<Category[]>>(path);
     return res.data;
   } catch (e) {
     return [];
   }
 }
 
-export async function getTags(): Promise<Tag[]> {
+export async function getTags(locale?: string): Promise<Tag[]> {
   try {
-    const res = await fetchApi<StrapiResponse<Tag[]>>('/tags');
+    const path = withLocale('/tags', locale);
+    const res = await fetchApi<StrapiResponse<Tag[]>>(path);
     return res.data;
   } catch (e) {
     return [];
   }
 }
 
-export async function getTechnologies(): Promise<Technology[]> {
+export async function getTechnologies(locale?: string): Promise<Technology[]> {
   try {
-    const res = await fetchApi<StrapiResponse<Technology[]>>(`/technologies?${DEFAULT_POPULATE}`);
+    const path = withLocale(`/technologies?${DEFAULT_POPULATE}`, locale);
+    const res = await fetchApi<StrapiResponse<Technology[]>>(path);
     return res.data;
   } catch (e) {
     return [];

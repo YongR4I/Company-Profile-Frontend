@@ -1,28 +1,31 @@
+import { getTranslations } from "next-intl/server";
 import React from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import CommonLayout from "@/components/layout/CommonLayout";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { PortfolioItem } from "@/types/portfolio";
 
 interface RelatedProjectsProps {
   projects: PortfolioItem[];
+  locale?: string;
 }
 
-export default function RelatedProjects({ projects }: RelatedProjectsProps) {
+export default async function RelatedProjects({ projects, locale }: RelatedProjectsProps) {
+  const t = await getTranslations({ locale: locale || "en", namespace: "portfolio" });
+
   if (projects.length === 0) return null;
 
   return (
     <CommonLayout className="h-fit! flex-col py-16 md:py-24 border-t border-[#132731]">
       <div className="w-full flex flex-col gap-10 md:gap-14">
-        {/* Section heading */}
         <ScrollReveal delay={0} duration={500} direction="right">
           <div className="flex flex-col gap-3">
             <span
               className="text-gray-600 uppercase tracking-wider text-sm font-medium"
               style={{ fontFamily: "var(--font-inter)" }}
             >
-              Explore More
+              {t("exploreMore")}
             </span>
             <h2
               className="text-white font-medium tracking-tight"
@@ -34,12 +37,11 @@ export default function RelatedProjects({ projects }: RelatedProjectsProps) {
                 textWrap: "balance",
               }}
             >
-              Related Projects
+              {t("relatedProjects")}
             </h2>
           </div>
         </ScrollReveal>
 
-        {/* Project cards grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           {projects.map((project, index) => (
             <ScrollReveal key={project.id} delay={index * 120} duration={500} direction="up">
@@ -50,9 +52,7 @@ export default function RelatedProjects({ projects }: RelatedProjectsProps) {
                   WebkitTapHighlightColor: "transparent",
                 }}
               >
-                {/* Card — press feedback */}
                 <div className="flex flex-col gap-5 transition-transform duration-150 ease-out active:scale-[0.98]">
-                  {/* Image */}
                   <div className="relative w-full aspect-[4/3] rounded-[18px] overflow-hidden bg-[#0a1a20] outline outline-1 outline-white/[0.08]">
                     {project.imageUrl ? (
                       <Image
@@ -67,7 +67,6 @@ export default function RelatedProjects({ projects }: RelatedProjectsProps) {
                         No Image
                       </div>
                     )}
-                    {/* Category badge */}
                     <div className="absolute top-4 left-4 z-10">
                       <div className="bg-white/10 backdrop-blur-md border border-white/20 text-white text-sm px-5 py-1.5 rounded-full">
                         {project.category}
@@ -75,7 +74,6 @@ export default function RelatedProjects({ projects }: RelatedProjectsProps) {
                     </div>
                   </div>
 
-                  {/* Info */}
                   <div className="flex flex-col gap-3">
                     <div className="flex items-center gap-3">
                       <h3 className="text-white text-xl md:text-2xl font-medium tracking-tight">

@@ -1,6 +1,7 @@
+import { getTranslations } from "next-intl/server";
 import CommonLayout from '@/components/layout/CommonLayout';
 import Image from 'next/image';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import React from 'react';
 import { getCta } from '@/lib/strapi-services';
 import ScrollReveal from '@/components/ui/ScrollReveal';
@@ -33,12 +34,17 @@ function ArrowOutwardIcon({ className }: { className?: string }) {
   );
 }
 
-export default async function CTA() {
-  const ctaData = await getCta();
+interface CTAProps {
+  locale?: string;
+}
 
-  const title = ctaData?.title || "Ready to Transform Your Business?";
-  const description = ctaData?.description || "Our clients trust us to transform ideas into scalable digital solutions. Now it's your turn to build with confidence.";
-  const buttonText = ctaData?.buttonText || "Let's Talk";
+export default async function CTA({ locale }: CTAProps) {
+  const t = await getTranslations({ locale: locale || "en", namespace: "common" });
+  const ctaData = await getCta(locale);
+
+  const title = ctaData?.title || t("ctaTitle");
+  const description = ctaData?.description || t("ctaDescription");
+  const buttonText = ctaData?.buttonText || t("ctaButton");
   const href = ctaData?.buttonHref || "/contact";
 
   return (
@@ -49,7 +55,6 @@ export default async function CTA() {
           className="w-full bg-linear-to-b from-[#040B0D] from-6% via-[#337E9D] via-76% to-[#55C6CA] rounded-[2.5rem] border border-[#122C37] overflow-hidden relative px-6 pt-10 sm:px-10 transition-[box-shadow] duration-300 ease-out hover:shadow-[0_8px_40px_rgba(85,198,202,0.1)]"
         >
           <div className="flex flex-col lg:flex-row items-center justify-between w-full relative z-10">
-            {/* Left Content */}
             <div className="flex flex-col items-center text-center gap-8 lg:w-1/2 py-6 lg:py-0">
               <h2 className="text-white font-semibold text-[clamp(28px,5vw,56px)] leading-[1.05] tracking-[-1.12px] max-w-[744px]">
                 {title}
@@ -68,7 +73,6 @@ export default async function CTA() {
               </Link>
             </div>
 
-            {/* Right Content - Character Image */}
             <div className="w-full lg:w-1/2 flex items-center justify-center relative h-[250px] sm:h-[300px] lg:h-[500px] mt-6 lg:mt-0">
               <Image
                 src="/images/branding/whale.png"

@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import CommonLayout from "@/components/layout/CommonLayout";
 import CTA from "@/components/shared/CTA";
 import ProjectDetailHero from "@/components/sections/portfolio/ProjectDetailHero";
@@ -9,19 +10,20 @@ import { getRelatedProjects } from "@/lib/portfolio-utils";
 import { portfolioData } from "@/data/portfolio";
 import { notFound } from "next/navigation";
 import React from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 interface PortfolioDetailProps {
   params: Promise<{
     slug: string;
+    locale: string;
   }>;
 }
 
 export default async function PortfolioDetailPage({ params }: PortfolioDetailProps) {
-  const { slug } = await params;
-  const strapiPortfolio = await getPortfolioBySlug(slug);
+  const { slug, locale } = await params;
+  const t = await getTranslations({ locale, namespace: "portfolio" });
+  const strapiPortfolio = await getPortfolioBySlug(slug, locale);
 
-  // Use Strapi data if available, otherwise fallback to local portfolioData
   let portfolio;
   if (strapiPortfolio) {
     portfolio = toPortfolioItem(strapiPortfolio);
@@ -33,8 +35,7 @@ export default async function PortfolioDetailPage({ params }: PortfolioDetailPro
     portfolio = localMatch;
   }
 
-  // Fetch all portfolios for related projects (fallback to local data)
-  const allPortfolios = await getPortfolios();
+  const allPortfolios = await getPortfolios(locale);
   const allMapped = allPortfolios.length > 0
     ? allPortfolios.map(toPortfolioItem)
     : portfolioData;
@@ -47,15 +48,12 @@ export default async function PortfolioDetailPage({ params }: PortfolioDetailPro
 
   return (
     <div className="flex flex-col min-h-screen bg-water-900">
-      {/* Hero Section with animations */}
       <CommonLayout className="h-fit! flex-col pt-32 md:pt-40 pb-8 md:pb-12">
         <ProjectDetailHero portfolio={portfolio} />
       </CommonLayout>
 
-      {/* Metadata + Description Section */}
       <CommonLayout className="h-fit! flex-col py-12 md:py-20">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 w-full">
-          {/* Left Column: Metadata */}
           <ScrollReveal delay={0} duration={500} direction="left">
             <aside className="w-full lg:w-[320px] xl:w-[360px] shrink-0 flex flex-col gap-0">
               {portfolio.client && (
@@ -64,7 +62,7 @@ export default async function PortfolioDetailPage({ params }: PortfolioDetailPro
                     className="text-gray-500 text-xs uppercase tracking-[0.12em] font-medium"
                     style={{ fontFamily: "var(--font-inter)" }}
                   >
-                    Client
+                    {t("client")}
                   </span>
                   <span className="text-white text-lg font-medium">
                     {portfolio.client}
@@ -78,7 +76,7 @@ export default async function PortfolioDetailPage({ params }: PortfolioDetailPro
                     className="text-gray-500 text-xs uppercase tracking-[0.12em] font-medium"
                     style={{ fontFamily: "var(--font-inter)" }}
                   >
-                    Date
+                    {t("date")}
                   </span>
                   <span className="text-white text-lg tabular-nums">
                     {portfolio.date}
@@ -91,7 +89,7 @@ export default async function PortfolioDetailPage({ params }: PortfolioDetailPro
                   className="text-gray-500 text-xs uppercase tracking-[0.12em] font-medium"
                   style={{ fontFamily: "var(--font-inter)" }}
                 >
-                  Category
+                  {t("category")}
                 </span>
                 <span className="text-white text-lg">
                   {portfolio.category}
@@ -104,7 +102,7 @@ export default async function PortfolioDetailPage({ params }: PortfolioDetailPro
                     className="text-gray-500 text-xs uppercase tracking-[0.12em] font-medium"
                     style={{ fontFamily: "var(--font-inter)" }}
                   >
-                    Technologies
+                    {t("technologies")}
                   </span>
                   <div className="flex flex-row flex-wrap gap-2">
                     {portfolio.technologies.map((tech, i) => (
@@ -121,7 +119,6 @@ export default async function PortfolioDetailPage({ params }: PortfolioDetailPro
             </aside>
           </ScrollReveal>
 
-          {/* Right Column: Description */}
           <ScrollReveal delay={200} duration={600} direction="right">
             <div className="w-full flex flex-col gap-6 lg:pt-0">
               <h2
@@ -131,10 +128,9 @@ export default async function PortfolioDetailPage({ params }: PortfolioDetailPro
                   textWrap: "balance",
                 }}
               >
-                About the Project
+                {t("aboutProject")}
               </h2>
 
-              {/* Decorative accent line */}
               <div className="w-16 h-[2px] bg-gradient-to-r from-water-300 to-water-500 rounded-full" />
 
               <p
@@ -147,7 +143,6 @@ export default async function PortfolioDetailPage({ params }: PortfolioDetailPro
                 {portfolio.description}
               </p>
 
-              {/* Back to portfolio link */}
               <div className="mt-8 md:mt-12">
                 <Link
                   href="/portfolio"
@@ -168,7 +163,7 @@ export default async function PortfolioDetailPage({ params }: PortfolioDetailPro
                     <path d="m12 19-7-7 7-7" />
                   </svg>
                   <span className="text-sm font-medium tracking-wider uppercase">
-                    Back to Portfolio
+                    {t("backToPortfolio")}
                   </span>
                 </Link>
               </div>
@@ -177,11 +172,8 @@ export default async function PortfolioDetailPage({ params }: PortfolioDetailPro
         </div>
       </CommonLayout>
 
-      {/* Related Projects */}
-      <RelatedProjects projects={relatedProjects} />
-
-      {/* CTA */}
-      <CTA />
+      <RelatedProjects projects={relatedProjects} locale={locale} />
+      <CTA locale={locale} />
     </div>
   );
 }

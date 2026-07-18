@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import SocialButton from "@/components/ui/SocialButton";
 import CommonLayout from "@/components/layout/CommonLayout";
 import React from "react";
@@ -14,7 +15,6 @@ import { IoIosMail } from "react-icons/io";
 import { getSiteSettings } from "@/lib/strapi-services";
 import SocialIconsRow from "./SocialIconsRow";
 
-// Static fallback social links
 const defaultSocialLinks = [
   { icon: RiLinkedinFill, href: "https://www.linkedin.com/company/sabirudev", label: "LinkedIn", copyValue: undefined },
   { icon: RiInstagramFill, href: "https://www.instagram.com/sabirudev/", label: "Instagram", copyValue: undefined },
@@ -36,10 +36,13 @@ function getSocialIcon(platform: string) {
   }
 }
 
-export default async function HeroFooter() {
-  // getSiteSettings is already called in layout.tsx — Next.js deduplicates
-  // the fetch automatically so this does NOT cause an extra network request.
-  const settings = await getSiteSettings();
+interface HeroFooterProps {
+  locale?: string;
+}
+
+export default async function HeroFooter({ locale }: HeroFooterProps) {
+  const t = await getTranslations({ locale: locale || "en", namespace: "home" });
+  const settings = await getSiteSettings(locale);
 
   const socialLinks =
     settings?.socialLinks && settings.socialLinks.length > 0
@@ -52,8 +55,7 @@ export default async function HeroFooter() {
       : defaultSocialLinks;
 
   const heroFooterText =
-    settings?.heroFooterText ||
-    "From strategy to deployment, we help businesses build modern digital products that are scalable, secure, and ready for the future.";
+    settings?.heroFooterText || t("heroFooterText");
 
   return (
     <CommonLayout

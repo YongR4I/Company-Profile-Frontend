@@ -1,0 +1,123 @@
+{
+  "nav": {
+    "home": "Beranda",
+    "services": "Layanan",
+    "portfolio": "Portofolio",
+    "about": "Tentang",
+    "blog": "Blog",
+    "contact": "Hubungi Kami",
+    "getInTouch": "Hubungi Kami"
+  },
+  "footer": {
+    "company": "Perusahaan",
+    "services": "Layanan",
+    "office": "Kantor",
+    "workshop": "Workshop"
+  },
+  "home": {
+    "heroTitle": "Inovasi Digital. Dirancang di Sekitar Bisnis Anda.",
+    "whyChooseUs": "Mengapa Bisnis Memilih Kami?",
+    "heroSubtitle": "",
+    "aboutHeadline": "Teknologi yang Tumbuh Bersama Bisnis Anda",
+    "aboutDescription": "Kami membuat perangkat lunak kustom, platform web, dan aplikasi mobile yang menyederhanakan alur kerja dan meningkatkan dampak bisnis.",
+    "heroFooterText": "Dari strategi hingga implementasi, kami membantu bisnis membangun produk digital modern yang skalabel, aman, dan siap untuk masa depan.",
+    "solution1Title": "Solusi Khusus",
+    "solution1Desc": "Dibangun sesuai dengan tujuan bisnis, alur kerja, dan tantangan unik Anda.",
+    "solution2Title": "Teknik Modern",
+    "solution2Desc": "Dibangun dengan teknologi modern, skalabel, dan aman.",
+    "solution3Title": "Kemitraan Jangka Panjang",
+    "solution3Desc": "Mitra tepercaya Anda dari ide hingga pertumbuhan jangka panjang.",
+    "why1Title": "Mulai dengan Konsultasi Gratis",
+    "why1Desc": "Bagikan ide Anda dengan tim kami dan temukan solusi digital yang tepat untuk bisnis Anda.",
+    "why2Title": "Selesaikan Bersama",
+    "why2Desc": "Ceritakan tantangan Anda, dan kami akan membantu Anda menemukan solusi teknologi terbaik.",
+    "why3Title": "Proyek Anda, Terlindungi",
+    "why3Desc": "Bangun dengan percaya diri karena ide dan proyek Anda tetap dijaga kerahasiaannya.",
+    "why4Title": "Dapatkan Respon Cepat",
+    "why4Desc": "Hubungi kami kapan saja dan dapatkan balasan cepat, komunikasi yang jelas, dan pembaruan tepat waktu."
+  },
+  "about": {
+    "heroTitle": "Tentang Sabiru",
+    "heroSubtitle": "Siapa Kami",
+    "missionLabel": "Misi Kami",
+    "missionText": "Kami membangun solusi digital yang andal dan skalabel yang memberdayakan bisnis untuk berinovasi, beradaptasi, dan mencapai pertumbuhan berkelanjutan. Misi kami adalah mempercepat transformasi digital melalui pemikiran strategis, rekayasa modern, dan teknologi inovatif\u2014memberikan hasil terukur yang menciptakan nilai bisnis yang langgeng.",
+    "processLabel": "Proses Kami",
+    "step1Title": "Bagikan Visi Anda",
+    "step1Desc": "Ceritakan tujuan, tantangan, dan kebutuhan proyek Anda.",
+    "step2Title": "Rencana & Bangun",
+    "step2Desc": "Kami mendefinisikan solusi dan memulai pengembangan bersama.",
+    "step3Title": "Tinjau & Sempurnakan",
+    "step3Desc": "Uji, tingkatkan, dan sempurnakan setiap detail sebelum diluncurkan.",
+    "step4Title": "Luncurkan & Kembangkan",
+    "step4Desc": "Luncurkan dengan dukungan berkelanjutan untuk pertumbuhan masa depan."
+  },
+  "blog": {
+    "heroTitle": "Blog Sabiru",
+    "heroSubtitle": "Apa yang ada di pikiran kami",
+    "emptyTitle": "Belum Ada Postingan",
+    "emptyDesc": "Kami belum mempublikasikan postingan blog ke CMS. Silakan periksa kembali nanti untuk pembaruan dan wawasan terbaru kami.",
+    "backToBlog": "Kembali ke Blog"
+  },
+  "portfolio": {
+    "heroTitle": "PROYEK KLIEN",
+    "heroSubtitle": "",
+    "backToPortfolio": "Kembali ke Portofolio",
+    "aboutProject": "Tentang Proyek",
+    "client": "Klien",
+    "date": "Tanggal",
+    "category": "Kategori",
+    "technologies": "Teknologi",
+    "exploreMore": "Jelajahi Lainnya",
+    "relatedProjects": "Proyek Terkait",
+    "seeMore": "Lihat Lainnya",
+    "showLess": "Tampilkan Sedikit",
+    "emptyTitle": "Portofolio Segera Hadir",
+    "emptyDesc": "Kami belum menambahkan proyek ke portofolio di CMS. Silakan periksa kembali nanti untuk melihat karya terbaru kami."
+  },
+  "services": {
+    "heroTitle": "Layanan Sabiru",
+    "heroSubtitle": "Apa yang kami lakukan untuk Anda",
+    "emptyTitle": "Layanan Segera Hadir",
+    "emptyDesc": "Kami sedang memperbarui katalog layanan kami di CMS. Silakan periksa kembali nanti untuk melihat apa yang dapat kami tawarkan.",
+    "svc1Title": "Transformasi Digital",
+    "svc1Desc": "Kami membantu bisnis merangkul transformasi digital melalui teknologi inovatif, perencanaan strategis, dan solusi yang dirancang untuk meningkatkan efisiensi, produktivitas, dan pertumbuhan berkelanjutan.",
+    "svc2Title": "Pengembangan Perangkat Lunak",
+    "svc2Desc": "Kami membangun aplikasi web, mobile, dan enterprise yang andal sesuai kebutuhan bisnis Anda, memberikan solusi digital yang skalabel, aman, dan berkinerja tinggi.",
+    "svc3Title": "Konsultasi TI",
+    "svc3Desc": "Kami menyediakan konsultasi teknologi strategis untuk membantu organisasi mengidentifikasi peluang, menentukan peta jalan digital, dan menerapkan solusi yang selaras dengan tujuan bisnis.",
+    "svc4Title": "Integrasi Sistem",
+    "svc4Desc": "Kami menghubungkan sistem, data, dan proses bisnis menjadi ekosistem digital terpadu, memungkinkan kolaborasi yang mulus dan operasi yang lebih efisien.",
+    "svc5Title": "Dukungan Terkelola",
+    "svc5Desc": "Kami menyediakan pemeliharaan berkelanjutan, pemantauan, dan dukungan teknis untuk memastikan solusi digital Anda tetap aman, optimal, dan siap untuk pertumbuhan masa depan."
+  },
+  "contact": {
+    "heroTitle": "Hubungi Kami",
+    "heroSubtitle": "Mari Terhubung",
+    "formTitle": "Mari Membangun Bersama",
+    "benefit1": "Diskusikan kebutuhan proyek Anda",
+    "benefit2": "Konsultasi proyek gratis",
+    "benefit3": "Respon cepat dari tim kami",
+    "firstName": "Nama Depan *",
+    "lastName": "Nama Belakang",
+    "email": "Alamat Email *",
+    "phone": "Nomor Telepon",
+    "message": "Bagaimana Kami Dapat Membantu? *",
+    "send": "Kirim",
+    "sending": "Mengirim...",
+    "successTitle": "Pesan Terkirim!",
+    "sendAnother": "Kirim pesan lain"
+  },
+  "common": {
+    "notFound": "Halaman tidak ditemukan",
+    "loading": "Memuat...",
+    "ctaTitle": "Siap Transformasi Bisnis Anda?",
+    "ctaDescription": "Klien kami percaya pada kami untuk mengubah ide menjadi solusi digital yang skalabel. Sekarang giliran Anda untuk membangun dengan percaya diri.",
+    "ctaButton": "Hubungi Kami",
+    "partnersTitle": "Mitra dalam Inovasi",
+    "partnersDesc": "Klien kami percaya pada kami untuk mengubah ide menjadi solusi digital yang skalabel. Sekarang giliran Anda untuk membangun dengan percaya diri."
+  },
+  "language": {
+    "en": "English",
+    "id": "Bahasa Indonesia"
+  }
+}

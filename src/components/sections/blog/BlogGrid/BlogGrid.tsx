@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 import type { BlogPost } from "@/types/blog";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 
@@ -10,13 +11,15 @@ interface BlogGridProps {
 }
 
 export default function BlogGrid({ posts }: BlogGridProps) {
+  const t = useTranslations("blog");
+
   if (!posts || posts.length === 0) {
     return (
       <section className="w-full bg-[#040A0C]">
         <div className="w-full px-4 md:px-18 py-32 flex flex-col items-center justify-center text-center gap-4">
-          <h3 className="text-2xl text-white font-medium mb-4">No Posts Yet</h3>
+          <h3 className="text-2xl text-white font-medium mb-4">{t("emptyTitle")}</h3>
           <p className="text-gray-400 max-w-[600px]">
-            We haven&apos;t published any blog posts to the CMS yet. Please check back later for our latest updates and insights.
+            {t("emptyDesc")}
           </p>
         </div>
       </section>

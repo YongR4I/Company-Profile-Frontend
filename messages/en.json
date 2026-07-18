@@ -1,0 +1,123 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "portfolio": "Portfolio",
+    "about": "About",
+    "blog": "Blog",
+    "contact": "Contact Us",
+    "getInTouch": "Get in Touch"
+  },
+  "footer": {
+    "company": "Company",
+    "services": "Services",
+    "office": "Office",
+    "workshop": "Workshop"
+  },
+  "home": {
+    "heroTitle": "Digital Innovation. Designed Around Your Business.",
+    "whyChooseUs": "Why Businesses Choose Us?",
+    "heroSubtitle": "",
+    "aboutHeadline": "Technology That Grows With Your Business",
+    "aboutDescription": "We create custom software, web platforms, and mobile applications that simplify workflows, improve business impact.",
+    "heroFooterText": "From strategy to deployment, we help businesses build modern digital products that are scalable, secure, and ready for the future.",
+    "solution1Title": "Tailored Solutions",
+    "solution1Desc": "Built around your business goals, workflows, and unique challenges.",
+    "solution2Title": "Modern Engineering",
+    "solution2Desc": "Built with modern, scalable, and secure technologies.",
+    "solution3Title": "Long-Term Partnership",
+    "solution3Desc": "Your trusted partner from idea to long-term growth.",
+    "why1Title": "Start with a Free Consultation",
+    "why1Desc": "Share your ideas with our team and discover the right digital solution for your business.",
+    "why2Title": "Let's Solve It Together",
+    "why2Desc": "Tell us your challenges, and we'll help you find the best technology solution.",
+    "why3Title": "Your Project, Protected",
+    "why3Desc": "Build with confidence knowing your ideas and project remain strictly confidential.",
+    "why4Title": "Get a Fast Response",
+    "why4Desc": "Reach out anytime and receive quick replies, clear communication, and timely updates."
+  },
+  "about": {
+    "heroTitle": "About Sabiru",
+    "heroSubtitle": "Who Are We",
+    "missionLabel": "Our Mission",
+    "missionText": "We build reliable, scalable digital solutions that empower businesses to innovate, adapt, and achieve sustainable growth. Our mission is to accelerate digital transformation through strategic thinking, modern engineering, and innovative technology\u2014delivering measurable outcomes that create lasting business value.",
+    "processLabel": "Our Process",
+    "step1Title": "Share Your Vision",
+    "step1Desc": "Tell us your goals, challenges, and project requirements.",
+    "step2Title": "Plan & Build",
+    "step2Desc": "We define the solution and begin development together.",
+    "step3Title": "Review & Refine",
+    "step3Desc": "Test, improve, and perfect every detail before launch.",
+    "step4Title": "Launch & Grow",
+    "step4Desc": "Go live with ongoing support for future growth."
+  },
+  "blog": {
+    "heroTitle": "Sabiru Blog",
+    "heroSubtitle": "What's on our mind",
+    "emptyTitle": "No Posts Yet",
+    "emptyDesc": "We haven't published any blog posts to the CMS yet. Please check back later for our latest updates and insights.",
+    "backToBlog": "Back to Blog"
+  },
+  "portfolio": {
+    "heroTitle": "CLIENT PROJECT",
+    "heroSubtitle": "",
+    "backToPortfolio": "Back to Portfolio",
+    "aboutProject": "About the Project",
+    "client": "Client",
+    "date": "Date",
+    "category": "Category",
+    "technologies": "Technologies",
+    "exploreMore": "Explore More",
+    "relatedProjects": "Related Projects",
+    "seeMore": "See More",
+    "showLess": "Show Less",
+    "emptyTitle": "Portfolio Coming Soon",
+    "emptyDesc": "We haven't added any projects to our portfolio in the CMS yet. Please check back later to see our latest work."
+  },
+  "services": {
+    "heroTitle": "Sabiru Services",
+    "heroSubtitle": "What we do for you",
+    "emptyTitle": "Services Coming Soon",
+    "emptyDesc": "We are currently updating our services catalog in the CMS. Please check back later to see what we can offer.",
+    "svc1Title": "Digital Transformation",
+    "svc1Desc": "We help businesses embrace digital transformation through innovative technology, strategic planning, and solutions designed to improve efficiency, productivity, and sustainable growth.",
+    "svc2Title": "Software Development",
+    "svc2Desc": "We build reliable web, mobile, and enterprise applications tailored to your business needs, delivering scalable, secure, and high-performance digital solutions.",
+    "svc3Title": "IT Consulting",
+    "svc3Desc": "We provide strategic technology consulting to help organizations identify opportunities, define digital roadmaps, and implement solutions aligned with business objectives.",
+    "svc4Title": "System Integration",
+    "svc4Desc": "We connect systems, data, and business processes into a unified digital ecosystem, enabling seamless collaboration and more efficient operations.",
+    "svc5Title": "Managed Support",
+    "svc5Desc": "We provide continuous maintenance, monitoring, and technical support to ensure your digital solutions remain secure, optimized, and ready for future growth."
+  },
+  "contact": {
+    "heroTitle": "Contact Us",
+    "heroSubtitle": "Let's Connect",
+    "formTitle": "Let's Build Together",
+    "benefit1": "Discuss your project requirements",
+    "benefit2": "Free project consultation",
+    "benefit3": "Quick response from our team",
+    "firstName": "First Name *",
+    "lastName": "Last Name",
+    "email": "Email Address *",
+    "phone": "Mobile Number",
+    "message": "How Can We Help? *",
+    "send": "Send",
+    "sending": "Sending...",
+    "successTitle": "Message Sent!",
+    "sendAnother": "Send another message"
+  },
+  "common": {
+    "notFound": "Page not found",
+    "loading": "Loading...",
+    "ctaTitle": "Ready to Transform Your Business?",
+    "ctaDescription": "Our clients trust us to transform ideas into scalable digital solutions. Now it's your turn to build with confidence.",
+    "ctaButton": "Let's Talk",
+    "partnersTitle": "Partners in innovation",
+    "partnersDesc": "Our clients trust us to transform ideas into scalable digital solutions. Now it's your turn to build with confidence."
+  },
+  "language": {
+    "en": "English",
+    "id": "Indonesian"
+  }
+}

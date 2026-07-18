@@ -1,29 +1,32 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { SiteSettings } from "@/types/strapi";
 import { strapiImageUrl } from "@/lib/mappers";
-
-const defaultMenuItems = [
-  { label: "Home", href: "/" },
-  { label: "Services", href: "/services" },
-  { label: "Portfolio", href: "/portfolio" },
-  { label: "About", href: "/about" },
-  { label: "Blog", href: "/blog" },
-  { label: "Contact Us", href: "/contact" },
-];
+import LanguageSwitcher from "@/components/ui/LanguageSwitcher";
 
 interface NavbarProps {
   settings?: SiteSettings | null;
+  locale?: string;
 }
 
-export default function Navbar({ settings }: NavbarProps) {
+export default function Navbar({ settings, locale }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const t = useTranslations("nav");
 
-  // Lock scroll when mobile menu is open
+  const defaultMenuItems = [
+    { label: t("home"), href: "/" },
+    { label: t("services"), href: "/services" },
+    { label: t("portfolio"), href: "/portfolio" },
+    { label: t("about"), href: "/about" },
+    { label: t("blog"), href: "/blog" },
+    { label: t("contact"), href: "/contact" },
+  ];
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -35,7 +38,6 @@ export default function Navbar({ settings }: NavbarProps) {
     };
   }, [isOpen]);
 
-  // Handle dynamic background blur on scroll
   useEffect(() => {
     const hero = document.querySelector("section");
     if (!hero) {
@@ -89,10 +91,9 @@ export default function Navbar({ settings }: NavbarProps) {
           </Link>
         </div>
 
-        {/* Desktop links */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-6">
           <div className="flex items-center gap-[15px]">
-            {displayMenu.filter(item => item.label.toLowerCase() !== "home" && item.label.toLowerCase() !== "contact us").map((item) => (
+            {displayMenu.filter(item => item.href !== "/" && item.href !== "/contact").map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
@@ -104,12 +105,14 @@ export default function Navbar({ settings }: NavbarProps) {
             ))}
           </div>
 
+          <LanguageSwitcher />
+
           <Link
             className="group relative overflow-hidden bg-white text-[clamp(16px,2vw,18px)] font-semibold text-water-700 px-6 py-3 rounded-full transition-all duration-300 ease-in-out hover:-translate-y-0.5 active:translate-y-0 active:scale-95 flex items-center gap-2"
             href="/contact"
           >
             <span className="relative z-10 transition-all duration-300">
-              Get in Touch
+              {t("getInTouch")}
             </span>
             <svg
               className="relative z-10"
@@ -129,13 +132,11 @@ export default function Navbar({ settings }: NavbarProps) {
           </Link>
         </div>
 
-        {/* Mobile Hamburger/Close Button */}
         <button
           className="flex md:hidden items-center justify-center w-10 h-10 focus:outline-none relative z-[101] text-white"
           onClick={() => setIsOpen(!isOpen)}
           aria-label={isOpen ? "Close menu" : "Open menu"}
         >
-          {/* Hamburger Icon */}
           <span
             className={`absolute transition-opacity duration-300 ease-in-out ${
               isOpen ? "opacity-0 pointer-events-none" : "opacity-100"
@@ -148,7 +149,6 @@ export default function Navbar({ settings }: NavbarProps) {
             </svg>
           </span>
 
-          {/* Close Icon */}
           <span
             className={`absolute transition-opacity duration-300 ease-in-out ${
               isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
@@ -162,17 +162,14 @@ export default function Navbar({ settings }: NavbarProps) {
         </button>
       </nav>
 
-      {/* Mobile Drawer Overlay */}
       <div
         className={`fixed inset-0 z-[98] bg-[#040A0C] flex flex-col px-8 py-16 pt-32 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] md:hidden ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        {/* Background glow effects matching dark ocean-tech aesthetic */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_left_center,_rgba(85,198,202,0.12)_0%,_transparent_60%)] pointer-events-none z-0" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_right_bottom,_rgba(73,166,204,0.08)_0%,_transparent_50%)] pointer-events-none z-0" />
 
-        {/* Navigation Links */}
         <div className="relative z-10 flex flex-col items-start gap-4 mt-8 overflow-y-auto">
           {displayMenu.map((item, index) => (
             <Link
@@ -191,8 +188,11 @@ export default function Navbar({ settings }: NavbarProps) {
             </Link>
           ))}
         </div>
+
+        <div className="relative z-10 mt-8">
+          <LanguageSwitcher />
+        </div>
       </div>
     </>
   );
 }
-

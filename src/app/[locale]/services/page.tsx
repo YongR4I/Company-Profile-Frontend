@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import HeroHeader from "@/components/shared/HeroHeader";
 import ServicesGrid from "@/components/sections/services/ServicesGrid";
 import Partners from "@/components/shared/Partners";
@@ -5,13 +6,18 @@ import CTA from "@/components/shared/CTA";
 import { getServicesPage, getServices } from "@/lib/strapi-services";
 import { toServiceItem } from "@/lib/mappers";
 
-export default async function ServicesPage() {
+export default async function ServicesPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "services" });
   const [pageData, services] = await Promise.all([
-    getServicesPage(),
-    getServices(),
+    getServicesPage(locale),
+    getServices(locale),
   ]);
 
-  // Map raw Strapi Service[] → ServiceItem[] so `icon` object becomes `iconUrl` string
   const mappedServices = services.map(toServiceItem);
 
   return (
@@ -19,14 +25,14 @@ export default async function ServicesPage() {
       <HeroHeader
         title={
           <>
-            <span className="text-water-300">Sabiru</span> Services
+            {t("heroTitle")}
           </>
         }
-        subtitle={pageData?.heroSubtitle || "What we do for you"}
+        subtitle={pageData?.heroSubtitle || t("heroSubtitle")}
       />
-      <ServicesGrid items={mappedServices} />
-      <Partners />
-      <CTA />
+      <ServicesGrid items={mappedServices} locale={locale} />
+      <Partners locale={locale} />
+      <CTA locale={locale} />
     </div>
   );
 }

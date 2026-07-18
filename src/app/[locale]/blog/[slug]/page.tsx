@@ -13,10 +13,10 @@ export async function generateStaticParams() {
 export default async function BlogPostPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: string }>;
 }) {
-  const { slug } = await params;
-  const strapiPost = await getBlogPostBySlug(slug);
+  const { slug, locale } = await params;
+  const strapiPost = await getBlogPostBySlug(slug, locale);
 
   if (!strapiPost) {
     notFound();
@@ -26,7 +26,7 @@ export default async function BlogPostPage({
 
   return (
     <div className="flex flex-col min-h-screen bg-water-900">
-      <BlogDetail post={post} />
+      <BlogDetail post={post} locale={locale} />
     </div>
   );
 }

@@ -1,5 +1,8 @@
-import Link from "next/link";
+"use client";
+
 import Image from "next/image";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import {
   RiLinkedinFill,
   RiInstagramFill,
@@ -14,22 +17,6 @@ import SocialButton from "@/components/ui/SocialButton";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { SiteSettings } from "@/types/strapi";
 import { strapiImageUrl } from "@/lib/mappers";
-
-const defaultCompanyLinks = [
-  { label: "Services", href: "/services" },
-  { label: "Portfolio", href: "/portfolio" },
-  { label: "About", href: "/about" },
-  { label: "Blog", href: "/blog" },
-  { label: "Contact", href: "/contact" },
-];
-
-const defaultServiceLinks = [
-  { label: "Digital Transformation", href: "/services" },
-  { label: "Software Development", href: "/services" },
-  { label: "IT Consulting", href: "/services" },
-  { label: "System Integration", href: "/services" },
-  { label: "Managed Support", href: "/services" },
-];
 
 const defaultSocialLinks = [
   { icon: RiLinkedinFill, href: "https://www.linkedin.com/company/sabirudev", label: "LinkedIn" },
@@ -54,9 +41,30 @@ function getSocialIcon(platform: string) {
 
 interface FooterProps {
   settings?: SiteSettings | null;
+  locale?: string;
 }
 
-export default function Footer({ settings }: FooterProps) {
+export default function Footer({ settings, locale }: FooterProps) {
+  const t = useTranslations("footer");
+  const tnav = useTranslations("nav");
+  const tsvc = useTranslations("services");
+
+  const defaultCompanyLinks = [
+    { label: tnav("services"), href: "/services" },
+    { label: tnav("portfolio"), href: "/portfolio" },
+    { label: tnav("about"), href: "/about" },
+    { label: tnav("blog"), href: "/blog" },
+    { label: tnav("contact"), href: "/contact" },
+  ];
+
+  const defaultServiceLinks = [
+    { label: tsvc("svc1Title"), href: "/services" },
+    { label: tsvc("svc2Title"), href: "/services" },
+    { label: tsvc("svc3Title"), href: "/services" },
+    { label: tsvc("svc4Title"), href: "/services" },
+    { label: tsvc("svc5Title"), href: "/services" },
+  ];
+
   const companyLinks = settings?.footerCompanyLinks?.length 
     ? settings.footerCompanyLinks.map(l => ({ label: l.label, href: l.href }))
     : defaultCompanyLinks;
@@ -79,7 +87,6 @@ export default function Footer({ settings }: FooterProps) {
 
   return (
     <footer className="relative bg-water-900 text-white overflow-hidden">
-      {/* Background decorative elements */}
       <div className="absolute bottom-0 pointer-events-none">
         <Image
           src="/images/shared/footer/grid-bg.png"
@@ -99,12 +106,9 @@ export default function Footer({ settings }: FooterProps) {
         />
       </div>
 
-      {/* Content */}
       <div className="relative z-10 mx-auto px-6 sm:px-8 lg:px-12">
-        {/* Top Section: Logo + Links */}
         <ScrollReveal delay={0} duration={500} direction="up">
           <div className="flex flex-col lg:flex-row justify-between items-start gap-12 py-8">
-            {/* Logo */}
             <div className="flex-shrink-0">
               <Image
                 src={logoUrl}
@@ -116,12 +120,10 @@ export default function Footer({ settings }: FooterProps) {
               />
             </div>
 
-            {/* Links columns */}
             <div className="grid grid-cols-2 gap-12 sm:flex sm:flex-row lg:gap-32 w-full lg:w-auto">
-              {/* Company Links */}
               <div>
                 <h4 className="text-heading-h5 font-medium text-gray-500 mb-3">
-                  Company
+                  {t("company")}
                 </h4>
                 <ul className="space-y-2.5">
                   {companyLinks.map((link) => (
@@ -137,10 +139,9 @@ export default function Footer({ settings }: FooterProps) {
                 </ul>
               </div>
 
-              {/* Services Links */}
               <div>
                 <h4 className="text-heading-h5 font-medium text-gray-500 mb-3">
-                  Services
+                  {t("services")}
                 </h4>
                 <ul className="space-y-2.5">
                   {serviceLinks.map((item, index) => (
@@ -156,7 +157,6 @@ export default function Footer({ settings }: FooterProps) {
           </div>
         </ScrollReveal>
 
-        {/* Social Section */}
         <ScrollReveal delay={150} duration={400} direction="right">
           <div className="flex justify-start lg:justify-end py-6">
             <div className="flex gap-2.5">
@@ -169,23 +169,20 @@ export default function Footer({ settings }: FooterProps) {
           </div>
         </ScrollReveal>
 
-        {/* Address Section */}
         <ScrollReveal delay={300} duration={500} direction="up">
           <div className="flex flex-col sm:flex-row justify-start lg:justify-end gap-10 py-6">
-            {/* Office Card */}
             <div className="w-full sm:max-w-[404px]">
               <h4 className="text-heading-h5 font-medium text-water-200 mb-2">
-                Office
+                {t("office")}
               </h4>
               <p className="text-body-base text-gray-400 leading-relaxed whitespace-pre-line">
                 {officeAddress}
               </p>
             </div>
 
-            {/* Workshop Card */}
             <div className="w-full sm:max-w-[300px]">
               <h4 className="text-heading-h5 font-medium text-water-200 mb-2">
-                Workshop
+                {t("workshop")}
               </h4>
               <p className="text-body-base text-gray-400 leading-relaxed whitespace-pre-line">
                 {workshopAddress}
@@ -197,4 +194,3 @@ export default function Footer({ settings }: FooterProps) {
     </footer>
   );
 }
-

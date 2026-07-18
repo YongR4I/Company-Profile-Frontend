@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useTranslations } from "next-intl";
 import PortfolioHeroFooter from "./PortfolioHeroFooter";
 import ProjectGrid from "./ProjectGrid";
 import { PortfolioItem } from "@/types/portfolio";
@@ -11,15 +12,15 @@ interface PortfolioGridContainerProps {
 }
 
 export default function PortfolioGridContainer({ projects }: PortfolioGridContainerProps) {
+  const t = useTranslations("portfolio");
   const [activeCategory, setActiveCategory] = useState("All Projects");
 
-  // Handle empty state exactly as requested: explain why there's no content
   if (projects && projects.length === 0) {
     return (
       <CommonLayout className="h-fit! flex-col items-center justify-center py-32 text-center border-t border-[#132731]">
-        <h3 className="text-2xl text-white font-medium mb-4">Portfolio Coming Soon</h3>
+        <h3 className="text-2xl text-white font-medium mb-4">{t("emptyTitle")}</h3>
         <p className="text-gray-400 max-w-[600px]">
-          We haven't added any projects to our portfolio in the CMS yet. Please check back later to see our latest work.
+          {t("emptyDesc")}
         </p>
       </CommonLayout>
     );

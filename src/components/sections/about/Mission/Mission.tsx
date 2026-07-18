@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import CommonLayout from "@/components/layout/CommonLayout";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import React from "react";
@@ -5,9 +6,12 @@ import React from "react";
 interface MissionProps {
   label?: string;
   text?: string;
+  locale?: string;
 }
 
-export default function Mission({ label, text }: MissionProps) {
+export default async function Mission({ label, text, locale }: MissionProps) {
+  const t = await getTranslations({ locale: locale || "en", namespace: "about" });
+
   return (
     <CommonLayout className="h-fit! flex-col items-start justify-center py-16 md:py-24">
       <div className="w-full text-left">
@@ -21,7 +25,7 @@ export default function Mission({ label, text }: MissionProps) {
               lineHeight: 1.2,
             }}
           >
-            {label || "Our Mission"}
+            {label || t("missionLabel")}
           </span>
         </ScrollReveal>
         <ScrollReveal delay={150} duration={600} direction="up">
@@ -34,17 +38,7 @@ export default function Mission({ label, text }: MissionProps) {
               letterSpacing: "-0.02em",
             }}
           >
-            {text || (
-              <>
-                We build reliable, scalable digital solutions that empower businesses
-                to innovate, adapt, and achieve sustainable growth.
-                <br />
-                <br />
-                Our mission is to accelerate digital transformation through strategic
-                thinking, modern engineering, and innovative technology—delivering
-                measurable outcomes that create lasting business value.
-              </>
-            )}
+            {text || t("missionText")}
           </p>
         </ScrollReveal>
       </div>

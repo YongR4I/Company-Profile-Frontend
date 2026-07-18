@@ -1,4 +1,5 @@
-import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import type { BlogPost } from "@/types/blog";
 import ScrollReveal from "@/components/ui/ScrollReveal";
@@ -39,9 +40,11 @@ function renderContent(content: string) {
 
 interface BlogDetailProps {
   post: BlogPost;
+  locale?: string;
 }
 
-export default function BlogDetail({ post }: BlogDetailProps) {
+export default async function BlogDetail({ post, locale }: BlogDetailProps) {
+  const t = await getTranslations({ locale: locale || "en", namespace: "blog" });
   return (
     <article className="w-full bg-[#040A0C] min-h-screen">
       <div className="w-full max-w-[820px] mx-auto px-4 md:px-0 py-12 md:py-16">
@@ -53,7 +56,7 @@ export default function BlogDetail({ post }: BlogDetailProps) {
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" className="transition-transform duration-200 ease-out group-hover:-translate-x-1">
               <path d="M15.8333 10H4.16667M4.16667 10L10 15.8333M4.16667 10L10 4.16667" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-            <span className="text-body-base font-medium">Back to Blog</span>
+            <span className="text-body-base font-medium">{t("backToBlog")}</span>
           </Link>
         </ScrollReveal>
 
