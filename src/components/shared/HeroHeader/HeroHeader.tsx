@@ -30,7 +30,8 @@ export default function HeroHeader({
             delay={300}
             direction="bottom"
             length={40}
-            className="text-white font-medium text-[clamp(28px,7.5vw,80px)] tracking-tight leading-[1.1] sm:leading-[1.1]"
+            delayMode="line"
+            className="text-white font-medium text-[clamp(28px,7.5vw,80px)] tracking-tight leading-[1.1] sm:leading-[1.1] whitespace-pre-line"
             style={{ fontFamily: "var(--font-inter)" }}
           >
             {title}
@@ -51,7 +52,7 @@ export default function HeroHeader({
         <div className="w-full relative z-10 text-left flex flex-col justify-end h-full">
           <ScrollReveal delay={200} duration={700} direction="up">
             <h1
-              className="text-white font-bold text-[clamp(60px,10vw,120px)] tracking-tighter leading-[0.9]"
+              className="text-white font-bold text-[clamp(60px,10vw,120px)] tracking-tighter leading-[0.9] whitespace-pre-line"
               style={{ fontFamily: "var(--font-inter)" }}
             >
               {title}
@@ -87,7 +88,7 @@ export default function HeroHeader({
         )}
         <ScrollReveal delay={400} duration={600} direction="up">
           <h1
-            className="text-white font-medium italic tracking-tight leading-[1.1]"
+            className="text-white font-medium italic tracking-tight leading-[1.1] whitespace-pre-line"
             style={{
               fontFamily: "var(--font-inter)",
               fontSize: "clamp(32px, 5vw, 72px)",

@@ -79,12 +79,16 @@ export function toServiceItem(service: StrapiService): ServiceItem {
 }
 
 export function toPortfolioItem(portfolio: StrapiPortfolio): PortfolioItem {
+  const primaryImage = strapiImageUrl(portfolio.image);
+  const galleryImages = portfolio.images?.map((img) => strapiImageUrl(img)).filter(Boolean) || [];
+
   return {
     id: String(portfolio.documentId || portfolio.id),
     title: portfolio.title,
     category: portfolio.category?.title || "Uncategorized",
     description: portfolio.description,
-    imageUrl: strapiImageUrl(portfolio.image),
+    imageUrl: primaryImage,
+    images: galleryImages.length > 0 ? [primaryImage, ...galleryImages] : [primaryImage],
     slug: portfolio.slug,
     client: portfolio.client,
     date: portfolio.date,

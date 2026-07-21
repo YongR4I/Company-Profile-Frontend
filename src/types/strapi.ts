@@ -110,6 +110,7 @@ export interface Portfolio {
   slug: string;
   description: string;
   image: StrapiImage;
+  images?: StrapiImage[];
   client?: string;
   date: string;
   category: Category;

@@ -172,7 +172,7 @@ export async function getServiceBySlug(slug: string, locale?: string): Promise<S
 export async function getPortfolios(locale?: string): Promise<Portfolio[]> {
   try {
     const path = withLocale(
-      `/portfolios?populate[0]=category&populate[1]=technologies&populate[2]=image`,
+      `/portfolios?populate[0]=category&populate[1]=technologies&populate[2]=image&populate[3]=images`,
       locale
     );
     const res = await fetchApi<StrapiResponse<Portfolio[]>>(path);
@@ -185,7 +185,7 @@ export async function getPortfolios(locale?: string): Promise<Portfolio[]> {
 export async function getPortfolioBySlug(slug: string, locale?: string): Promise<Portfolio | null> {
   try {
     const path = withLocale(
-      `/portfolios?filters[slug][$eq]=${slug}&populate[0]=category&populate[1]=technologies&populate[2]=image`,
+      `/portfolios?filters[slug][$eq]=${slug}&populate[0]=category&populate[1]=technologies&populate[2]=image&populate[3]=images`,
       locale
     );
     const res = await fetchApi<StrapiResponse<Portfolio[]>>(path);

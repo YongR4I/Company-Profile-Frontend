@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
-import Image from "next/image";
+import React, { useEffect, useState } from "react";
 import { Link } from "@/i18n/navigation";
 import { PortfolioItem } from "@/types/portfolio";
+import ProjectImageCarousel from "@/components/sections/portfolio/ProjectImageCarousel/ProjectImageCarousel";
 
 interface ProjectDetailHeroProps {
   portfolio: PortfolioItem;
@@ -11,18 +11,19 @@ interface ProjectDetailHeroProps {
 
 export default function ProjectDetailHero({ portfolio }: ProjectDetailHeroProps) {
   const [mounted, setMounted] = useState(false);
-  const heroRef = useRef<HTMLDivElement>(null);
+
+  const allImages =
+    portfolio.images && portfolio.images.length > 0
+      ? portfolio.images
+      : [portfolio.imageUrl];
 
   useEffect(() => {
-    // Trigger mount animations after first paint
-    const frame = requestAnimationFrame(() => {
-      setMounted(true);
-    });
+    const frame = requestAnimationFrame(() => setMounted(true));
     return () => cancelAnimationFrame(frame);
   }, []);
 
   return (
-    <div ref={heroRef} className="w-full flex flex-col gap-8 md:gap-12">
+    <div className="w-full flex flex-col gap-8 md:gap-12">
       {/* Breadcrumb Navigation */}
       <nav
         aria-label="Breadcrumb"
@@ -30,7 +31,8 @@ export default function ProjectDetailHero({ portfolio }: ProjectDetailHeroProps)
         style={{
           opacity: mounted ? 1 : 0,
           transform: mounted ? "translateY(0)" : "translateY(12px)",
-          transition: "opacity 600ms cubic-bezier(0.23, 1, 0.32, 1), transform 600ms cubic-bezier(0.23, 1, 0.32, 1)",
+          transition:
+            "opacity 600ms cubic-bezier(0.23, 1, 0.32, 1), transform 600ms cubic-bezier(0.23, 1, 0.32, 1)",
           transitionDelay: "100ms",
         }}
       >
@@ -40,39 +42,36 @@ export default function ProjectDetailHero({ portfolio }: ProjectDetailHeroProps)
         >
           Portfolio
         </Link>
-        <span className="text-gray-600" aria-hidden="true">/</span>
+        <span className="text-gray-600" aria-hidden="true">
+          /
+        </span>
         <span className="text-gray-500 uppercase tracking-wider font-medium">
           {portfolio.category}
         </span>
       </nav>
 
-      {/* Hero Image with clip-path reveal */}
+      {/* Image Carousel */}
+      <ProjectImageCarousel
+        images={allImages}
+        title={portfolio.title}
+        category={portfolio.category}
+      />
+
+      {/* Category badge — overlaid on carousel area via absolute positioning inside carousel, 
+          but we also show it below for context on mobile */}
       <div
-        className="relative w-full aspect-[16/9] md:aspect-[21/9] rounded-[24px] overflow-hidden outline outline-1 outline-white/[0.08]"
+        className="md:hidden"
         style={{
-          clipPath: mounted ? "inset(0 0 0 0)" : "inset(0 0 6% 0)",
           opacity: mounted ? 1 : 0,
-          transition: "clip-path 800ms cubic-bezier(0.23, 1, 0.32, 1), opacity 600ms cubic-bezier(0.23, 1, 0.32, 1)",
-          transitionDelay: "200ms",
+          transform: mounted ? "translateY(0)" : "translateY(8px)",
+          transition:
+            "opacity 500ms cubic-bezier(0.23, 1, 0.32, 1), transform 500ms cubic-bezier(0.23, 1, 0.32, 1)",
+          transitionDelay: "350ms",
         }}
       >
-        <Image
-          src={portfolio.imageUrl}
-          alt={portfolio.title}
-          fill
-          className="object-cover"
-          priority
-          unoptimized
-        />
-        {/* Bottom gradient for grounding */}
-        <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
-
-        {/* Category badge */}
-        <div className="absolute top-5 left-5 md:top-8 md:left-8 z-10">
-          <div className="bg-white/10 backdrop-blur-md border border-white/20 text-white text-sm px-6 py-2 rounded-full">
-            {portfolio.category}
-          </div>
-        </div>
+        <span className="bg-white/5 border border-white/10 text-white/70 text-xs px-4 py-1.5 rounded-full">
+          {portfolio.category}
+        </span>
       </div>
 
       {/* Project Title + Date */}
@@ -81,8 +80,9 @@ export default function ProjectDetailHero({ portfolio }: ProjectDetailHeroProps)
         style={{
           opacity: mounted ? 1 : 0,
           transform: mounted ? "translateY(0)" : "translateY(16px)",
-          transition: "opacity 600ms cubic-bezier(0.23, 1, 0.32, 1), transform 600ms cubic-bezier(0.23, 1, 0.32, 1)",
-          transitionDelay: "350ms",
+          transition:
+            "opacity 600ms cubic-bezier(0.23, 1, 0.32, 1), transform 600ms cubic-bezier(0.23, 1, 0.32, 1)",
+          transitionDelay: "400ms",
         }}
       >
         <h1
