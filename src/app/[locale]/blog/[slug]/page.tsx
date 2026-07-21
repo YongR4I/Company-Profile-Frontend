@@ -3,6 +3,7 @@ import { getBlogPosts, getBlogPostBySlug } from "@/lib/strapi-services";
 import { toBlogPost } from "@/lib/mappers";
 import BlogDetail from "@/components/sections/blog/BlogDetail";
 import { routing } from "@/i18n/routing";
+import { blogData } from "@/data/blog";
 
 export async function generateStaticParams() {
   const results = await Promise.all(
@@ -22,11 +23,16 @@ export default async function BlogPostPage({
   const { slug, locale } = await params;
   const strapiPost = await getBlogPostBySlug(slug, locale);
 
-  if (!strapiPost) {
-    notFound();
+  let post;
+  if (strapiPost) {
+    post = toBlogPost(strapiPost);
+  } else {
+    const localMatch = blogData.find((b) => b.slug === slug);
+    if (!localMatch) {
+      notFound();
+    }
+    post = localMatch;
   }
-
-  const post = toBlogPost(strapiPost);
 
   return (
     <div className="flex flex-col min-h-screen bg-water-900">

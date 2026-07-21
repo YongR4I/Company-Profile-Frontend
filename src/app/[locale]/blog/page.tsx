@@ -5,6 +5,7 @@ import Partners from "@/components/shared/Partners";
 import CTA from "@/components/shared/CTA";
 import { getBlogPosts, getBlogPage } from "@/lib/strapi-services";
 import { toBlogPost } from "@/lib/mappers";
+import { blogData } from "@/data/blog";
 
 export default async function BlogPage({
   params,
@@ -18,6 +19,8 @@ export default async function BlogPage({
     getBlogPage(locale),
   ]);
 
+  const displayPosts = posts.length > 0 ? posts.map(toBlogPost) : blogData;
+
   return (
     <div className="flex flex-col min-h-screen bg-water-900">
       <HeroHeader
@@ -29,7 +32,7 @@ export default async function BlogPage({
         subtitle={page?.heroSubtitle || t("heroSubtitle")}
         variant="subpage"
       />
-      <BlogGrid posts={posts.map(toBlogPost)} />
+      <BlogGrid posts={displayPosts} />
       <Partners locale={locale} />
       <CTA locale={locale} />
     </div>

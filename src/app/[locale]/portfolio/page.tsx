@@ -5,6 +5,7 @@ import Partners from "@/components/shared/Partners";
 import CTA from "@/components/shared/CTA";
 import { getPortfolioPage, getPortfolios } from "@/lib/strapi-services";
 import { toPortfolioItem } from "@/lib/mappers";
+import { portfolioData } from "@/data/portfolio";
 
 export default async function PortfolioPage({
   params,
@@ -18,7 +19,9 @@ export default async function PortfolioPage({
     getPortfolios(locale),
   ]);
 
-  const mappedPortfolios = portfolios.map(toPortfolioItem);
+  const mappedPortfolios = portfolios.length > 0
+    ? portfolios.map(toPortfolioItem)
+    : portfolioData;
 
   return (
     <div className="flex flex-col min-h-screen bg-transparent">
